@@ -1,4 +1,8 @@
-export interface NoteText {
+interface BaseNoteText {
   key: string;
-  value: string;
+  __expires?: number;
 }
+
+export type NoteText =
+  | (BaseNoteText & {value: string})
+  | (BaseNoteText & Record<string, unknown>);

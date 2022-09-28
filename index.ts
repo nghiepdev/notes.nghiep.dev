@@ -1,9 +1,10 @@
-import Fastify from 'fastify';
+import Fastify, {FastifyListenOptions} from 'fastify';
 import {Deta} from 'deta';
 
 import type {NoteText} from './types';
 
-const __PORT = process.env.PORT || 3000;
+type NodeTextResponse = NoteText | null;
+
 const __DEV = process.env.NODE_ENV === 'development';
 
 const app = Fastify({
@@ -11,7 +12,9 @@ const app = Fastify({
 });
 
 const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
-const db = deta.Base(process.env.APP_NAME);
+const db = deta.Base(
+  __DEV ? `${process.env.APP_NAME}_dev` : process.env.APP_NAME,
+);
 
 app.get('/', async (request, reply) => {
   // TODO: Build UI
@@ -23,9 +26,7 @@ app.get<{
     id: string;
   };
 }>('/:id', async (request, reply) => {
-  const result = (await db.get(
-    request.params.id,
-  )) as unknown as NoteText | null;
+  const result = (await db.get(request.params.id)) as NodeTextResponse;
 
   if (result) {
     reply.send(result);
@@ -41,12 +42,16 @@ app.get<{
     id: string;
   };
 }>('/:id/raw', async (request, reply) => {
-  const result = (await db.get(
-    request.params.id,
-  )) as unknown as NoteText | null;
+  const result = (await db.get(request.params.id)) as NodeTextResponse;
 
   if (result) {
-    return reply.send(result.value);
+    const {key, __expires, value, ...restData} = result;
+
+    if (value) {
+      reply.send(value);
+    }
+
+    reply.send(restData);
   }
 
   reply.status(404).send({
@@ -57,7 +62,7 @@ app.get<{
 app.post<{
   Body: string;
 }>('/', async (request, reply) => {
-  const result = (await db.put(request.body)) as unknown as NoteText | null;
+  const result = (await db.put(request.body, undefined)) as NodeTextResponse;
 
   if (result) {
     reply.headers({
@@ -72,21 +77,20 @@ app.post<{
   });
 });
 
-const start = async () => {
-  try {
-    await app.listen({port: +__PORT});
-    const address = app.server.address();
-    const port = typeof address === 'string' ? address : address?.port;
+const start = async (options: FastifyListenOptions) => {
+  app.listen(options, (error, address) => {
+    if (error) {
+      throw error;
+    }
 
-    console.log(`App listening on port ${port}`);
-  } catch (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
+    console.info(`⚡⚡⚡ Server ready at ${address}`);
+  });
 };
 
 if (__DEV) {
-  start();
+  start({
+    port: +(process.env.PORT || 3000),
+  });
 }
 
 module.exports = app;
