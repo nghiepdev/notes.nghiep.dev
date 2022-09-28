@@ -10,14 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     name: Deta Deploy
     steps:
-      - uses: actions/checkout@v3
-      - name: Build
+      - name: Checkout
+        uses: actions/checkout@v3
+        env:
+          APP_NAME: FreeText
+          APP_DETA_PROJECT_KEY: ${{ secrets.APP_DETA_PROJECT_KEY }}
+      - name: Setup environments
+        run: env | grep "^APP_" >> .env
+      - name: Setup Nodejs
         uses: actions/setup-node@v3
         with:
           node-version: 14
           cache: 'yarn'
-      - run: yarn install
-      - run: yarn build
+      - name: Install dependensis
+        run: yarn install
+      - name: Build code
+        run: yarn build
       - name: Publish
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
