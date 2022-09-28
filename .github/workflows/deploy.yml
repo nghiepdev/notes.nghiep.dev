@@ -1,0 +1,20 @@
+name: Deta Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deta Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish
+        uses: BogDAAAMN/deta-deploy-action@v1.0.1
+        with:
+          deta-access-token: ${{ secrets.DETA_ACCESS_TOKEN }}
+          deta-name: 'freetext'
+          deta-project: 'default'
+          deta-project-dir: '.'
