@@ -204,6 +204,7 @@ dist
 # Deta
 .deta/state
 index.js
+constants.js
 
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,node

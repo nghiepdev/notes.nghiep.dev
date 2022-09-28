@@ -27,7 +27,8 @@
     "trailingComma": "all",
     "bracketSpacing": false,
     "arrowParens": "avoid",
-    "endOfLine": "auto"
+    "endOfLine": "auto",
+    "htmlWhitespaceSensitivity": "ignore"
   },
   "repository": {
     "type": "git",

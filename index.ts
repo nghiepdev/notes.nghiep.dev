@@ -1,7 +1,9 @@
 import Fastify, {FastifyListenOptions} from 'fastify';
 import {Deta} from 'deta';
+import fs from 'fs';
 
 import type {NoteText} from './types';
+import {META_HTML, META_DESCRIPTION} from './constants';
 
 type NodeTextResponse = NoteText | null;
 
@@ -12,13 +14,21 @@ const app = Fastify({
 });
 
 const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
-const db = deta.Base(
-  __DEV ? `${process.env.APP_NAME}_dev` : process.env.APP_NAME,
-);
+const db = deta.Base(`${process.env.APP_NAME}:${process.env.NODE_ENV}`);
 
 app.get('/', async (request, reply) => {
-  // TODO: Build UI
-  return {hello: 'world!'};
+  reply.headers({
+    'content-type': 'text/html;charset=UTF-8',
+  });
+
+  const html = fs
+    .readFileSync('./ui.html')
+    .toString()
+    .replace(/{title_placeholder}/g, META_HTML)
+    .replace(/{description_placeholder}/g, META_DESCRIPTION)
+    .replace(/{form_placeholder}/g, fs.readFileSync('./form.html').toString());
+
+  reply.send(html);
 });
 
 app.get<{
