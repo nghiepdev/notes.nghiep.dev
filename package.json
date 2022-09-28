@@ -1,0 +1,18 @@
+{
+  "name": "freetext",
+  "private": true,
+  "version": "1.0.0",
+  "homepage": "https://freetext.dete.dev",
+  "description": "Free text note service",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nghiepit/freetext.git"
+  },
+  "author": "me@nghiep.dev",
+  "license": "MIT"
+}

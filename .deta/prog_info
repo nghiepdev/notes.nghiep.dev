@@ -1,0 +1,1 @@
+{"id":"a26d89ee-e097-4cc6-ad43-ef197d1ff70d","space":26817,"runtime":"nodejs14.x","name":"freetext","path":"58cxg8","project":"c0sh734e","account":"144798365827","region":"ap-southeast-1","deps":["express@^4.18.1"],"envs":null,"public":true,"log_level":"debug","cron":""}
