@@ -10,7 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Deta Deploy
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Build
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn build
       - name: Publish
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
