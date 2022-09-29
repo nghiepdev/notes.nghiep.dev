@@ -203,7 +203,11 @@
           async submit() {
             const formStore = Alpine.store('form');
             const targetUrl = new URL('/', window.location.origin);
-            const {content, expireIn} = formStore;
+            const {content, expireIn, submiting} = formStore;
+
+            if (submiting) {
+              return;
+            }
 
             if (expireIn && expireIn > 0) {
               targetUrl.searchParams.set('expire_in', formStore.expireIn);
