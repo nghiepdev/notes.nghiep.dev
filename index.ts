@@ -39,7 +39,10 @@ app.get<{
   const result = (await db.get(request.params.id)) as NodeTextResponse;
 
   if (result) {
-    reply.send(result);
+    reply.send({
+      __raw: `${request.protocol}://${request.hostname}/${result.key}/raw`,
+      ...result,
+    });
   }
 
   reply.status(404).send({
@@ -70,9 +73,16 @@ app.get<{
 });
 
 app.post<{
+  Querystring: {
+    expire_in?: string;
+  };
   Body: string;
 }>('/', async (request, reply) => {
-  const result = (await db.put(request.body, undefined)) as NodeTextResponse;
+  const expireIn = request.query.expire_in;
+
+  const result = (await db.put(request.body, undefined, {
+    expireIn: expireIn ? +expireIn : undefined,
+  })) as NodeTextResponse;
 
   if (result) {
     reply.headers({
