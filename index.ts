@@ -14,7 +14,9 @@ const app = Fastify({
 });
 
 const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
-const db = deta.Base(`${process.env.APP_NAME}:${process.env.NODE_ENV}`);
+const db = deta.Base(
+  `${process.env.APP_NAME}:${process.env.NODE_ENV || 'default'}`,
+);
 
 app.get('/', async (request, reply) => {
   reply.headers({

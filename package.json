@@ -6,7 +6,7 @@
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only index",
-    "build": "NODE_ENV=production tsc --noEmit false"
+    "build": "tsc --noEmit false"
   },
   "dependencies": {
     "deta": "^1.1.0",
