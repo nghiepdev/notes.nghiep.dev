@@ -25,7 +25,9 @@
   <body>
     <div class="font-sans bg-white flex flex-col min-h-screen w-full">
       <div>
-        <div class="bg-gray-200 px-4 py-4">
+        <div
+          class="bg-gradient-to-r from-green-50/50 via-indigo-200/50 to-indigo-100/50 px-4 py-4"
+        >
           <div
             class="w-full md:max-w-6xl md:mx-auto flex items-center justify-between"
           >
@@ -49,7 +51,7 @@
               <a
                 href="https://github.com/nghiepit/freetext"
                 target="blank_github"
-                class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg"
+                class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-slate-50 rounded-lg"
               >
                 Go to Github
               </a>
@@ -57,7 +59,9 @@
           </div>
         </div>
 
-        <div class="bg-gray-200 md:overflow-hidden">
+        <div
+          class="bg-gradient-to-r from-green-50/50 via-indigo-200/50 to-indigo-100/50 md:overflow-hidden"
+        >
           <div class="px-4 py-4 md:py-16">
             <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
               <h1
@@ -92,9 +96,8 @@
               ></div>
             </div>
           </div>
-
           <svg
-            class="fill-current bg-gray-200 text-white hidden md:block"
+            class="fill-current bg-slate-100/20 text-white hidden md:block"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
           >
@@ -106,34 +109,30 @@
         </div>
 
         <div
-          class="max-w-4xl mx-auto bg-white shadow-lg relative z-20 hidden md:block"
-          style="margin-top: -320px; border-radius: 20px"
+          class="max-w-4xl lg:mx-auto bg-white shadow-lg relative z-20 hidden md:block rounded-[20px] -mt-[320px] sm:-mt-[200px] xl:-mt-[320px] 2xl:-mt-[475px] mx-4"
         >
           <div
-            class="h-20 w-20 rounded-full bg-yellow-500 absolute top-0 left-0 -ml-10 -mt-10"
-            style="z-index: -1"
+            class="h-20 w-20 rounded-full bg-yellow-500 absolute top-0 left-0 -ml-10 -mt-10 z-[-1]"
           ></div>
 
           <div
-            class="h-5 w-5 rounded-full bg-blue-500 absolute top-0 left-0 -ml-32 mt-12"
-            style="z-index: -1"
+            class="h-5 w-5 rounded-full bg-blue-500 absolute top-0 left-0 -ml-32 mt-12 z-[-1]"
           ></div>
 
           <div
             class="h-10 bg-white rounded-t-lg border-b border-gray-100"
           ></div>
-          <div class="flex" style="height: 550px">{form_placeholder}</div>
+          <div class="flex h-[550px]">{form_placeholder}</div>
         </div>
 
         <div class="px-4 md:hidden">
           <div
-            class="-mt-10 max-w-4xl mx-auto bg-white shadow-lg relative z-20"
-            style="border-radius: 20px"
+            class="-mt-10 max-w-4xl mx-auto bg-white shadow-lg relative z-20 rounded-[20px]"
           >
             <div
               class="h-10 bg-white rounded-t-lg border-b border-gray-100"
             ></div>
-            <div class="flex" style="height: 340px">{form_placeholder}</div>
+            <div class="flex h-[340px]">{form_placeholder}</div>
           </div>
         </div>
 
@@ -147,7 +146,7 @@
             ©12bay.vn
           </a>
           <span
-            class="hidden md:inline-block before:content-['.'] after:content-['.'] before:-ml-1 after:-ml-1"
+            class="hidden sm:inline-block before:content-['.'] after:content-['.'] before:-ml-1 after:-ml-1"
           >
             Inspired by TailwindCSS
             <a
