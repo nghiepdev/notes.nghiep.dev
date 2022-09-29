@@ -24,7 +24,7 @@
           <select
             x-model.number="$store.form.expireIn"
             :disabled="$store.form.submiting"
-            class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            class="block w-full rounded-full border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           >
             <template x-for="option in expireIn" :key="option.value">
               <option :value="option.value" x-text="option.label"></option>
@@ -36,6 +36,7 @@
         <button
           type="submit"
           :disabled="$store.form.disabled"
+          :class="{'cursor-not-allowed': $store.form.submiting}"
           class="disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
         >
           <template x-if="!$store.form.disabled">
@@ -62,7 +63,9 @@
               </svg>
             </template>
           </template>
-          Create
+          <span
+            x-text="$store.form.submiting ?  'Creating...': 'Create'"
+          ></span>
         </button>
       </div>
     </div>

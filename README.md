@@ -1,8 +1,7 @@
 # FREE TEXT NOTES
 
-> The simplest way to keep text notes. Light, clean, and free.
-> This free online notepad allows you to create notes in a web browser. No sign up required. Free forever. Never expired.
->
+> The simplest way to keep text notes. Light, clean, and free.  
+> This free online notepad allows you to create notes in a web browser. No sign up required. Free forever. Never expired.  
 > https://freetext.deta.dev
 
 ![FreeText](./screenshot.png)
