@@ -4,7 +4,7 @@
     <textarea
       id="content"
       x-ref="content"
-      class="block h-full w-full resize-none border-0 py-1 placeholder-gray-500 focus:ring-0 sm:text-sm"
+      class="block h-full w-full resize-none border-0 py-1 placeholder:text-slate-400 focus:ring-0 sm:text-sm"
       placeholder="Write a text..."
       spellcheck="false"
       autofocus
@@ -36,7 +36,7 @@
           type="submit"
           :disabled="$store.form.disabled"
           :class="{'cursor-not-allowed': $store.form.submiting}"
-          class="[&[x-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
+          class="[&[x-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
         >
           <template x-if="!$store.form.disabled">
             <template x-if="$store.form.submiting">
