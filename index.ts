@@ -24,14 +24,17 @@ app.get('/', async (request, reply) => {
   });
 
   const html = fs
-    .readFileSync('./ui.html')
+    .readFileSync('./index.html')
     .toString()
     .replace(/{title_placeholder}/g, META_TITLE)
     .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
     .replace(/{description_placeholder}/g, META_DESCRIPTION)
     .replace(/{expire_in_placeholder}/g, JSON.stringify(EXPIRE_IN))
-    .replace(/{form_placeholder}/g, fs.readFileSync('./form.html').toString());
-
+    .replace(/{form_placeholder}/g, fs.readFileSync('./form.html').toString())
+    .replace(
+      '{template_placeholder}',
+      fs.readFileSync('./template.html').toString(),
+    );
   reply.send(html);
 });
 
@@ -97,7 +100,7 @@ app.post<{
   }
 
   reply.status(400).send({
-    message: 'Oops! Something went wrong!',
+    message: 'Oops! Something went wrong',
   });
 });
 

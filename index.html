@@ -22,9 +22,8 @@
     <script src="//unpkg.com/@alpinejs/persist@3"></script>
     <script src="//unpkg.com/alpinejs@3" defer></script>
   </head>
-  <body>
+  <body x-data="app">
     <div
-      x-data="app"
       class="[&_[x-cloak]]:opacity-0 flex min-h-screen w-full flex-col bg-white font-sans"
     >
       <div>
@@ -141,6 +140,7 @@
         </p>
       </div>
     </div>
+    {template_placeholder}
     <script>
       document.addEventListener('alpine:init', () => {
         Alpine.data('app', () => ({
