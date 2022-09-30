@@ -113,7 +113,7 @@
           <div
             class="h-10 rounded-t-lg border-b border-gray-100 bg-white"
           ></div>
-          <div class="flex h-[550px]">{form_placeholder}</div>
+          <div class="flex h-[340px] sm:h-[550px]">{form_placeholder}</div>
         </div>
 
         <p class="mt-10 p-4 text-center text-gray-600">
@@ -147,6 +147,7 @@
           title: '{title_placeholder}',
           descripton: '{description_placeholder}',
           expireIn: {expire_in_placeholder},
+          copyNoteLinkState: 'Copy',
           get titleMarkup() {
             return this.title.replace(/{(.*)}/g, (p, p1) => {
               return `
@@ -195,12 +196,33 @@
                 throw new Error((await res.text()) || res.statusText);
               });
 
-              window.location.assign(`/${response.key}`);
-              formStore.toggleSubmiting(false);
+              console.log(response.__expires);
+
+              formStore.submitSuccess = {
+                link: new URL(`/${response.key}/raw`, window.location.origin),
+                expireText:
+                  response.__expires &&
+                  new Date(response.__expires * 1000).toLocaleString(),
+              };
             } catch (error) {
-              formStore.toggleSubmiting(false);
               formStore.submitError = error.message;
             }
+
+            formStore.toggleSubmiting(false);
+          },
+          copyToClipboard(value) {
+            return navigator.clipboard.writeText(value);
+          },
+          copyNoteLink(link) {
+            try {
+              this.copyToClipboard(link);
+              this.copyNoteLinkState = 'Copied';
+            } catch (error) {
+              console.error(error);
+            }
+            setTimeout(() => {
+              this.copyNoteLinkState = 'Copy';
+            }, 2000);
           },
         }));
 
@@ -208,7 +230,8 @@
           content: '',
           expireIn: Alpine.$persist(-1).as('expireIn'),
           submiting: false,
-          submitError: '',
+          submitSuccess: null,
+          submitError: null,
 
           get disabled() {
             return !this.content.trim();
@@ -219,7 +242,12 @@
           },
 
           tryAgain() {
-            this.submitError = '';
+            this.submitError = null;
+          },
+
+          newNote() {
+            this.content = '';
+            this.submitSuccess = null;
           },
         });
       });

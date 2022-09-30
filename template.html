@@ -1,49 +1,163 @@
-<!-- Failed Modal -->
-<template x-if="$store.form.submitError">
-  <div class="fixed inset-0 z-20 bg-white/30 backdrop-blur-sm">
+<!-- Success Modal -->
+<template x-if="$store.form.submitSuccess">
+  <div class="fixed inset-0 z-20">
     <div
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform overflow-hidden rounded-lg border border-gray-100 bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
+      class="absolute inset-0 bg-white/30 backdrop-blur-sm transition-all"
+    ></div>
+    <div
+      class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform sm:max-w-md"
     >
-      <div>
-        <div
-          class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100"
-        >
-          <svg
-            class="h-6 w-6 text-red-600"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
+      <div
+        class="mx-4 rounded-2xl border border-gray-100 bg-white px-4 pt-5 pb-4 text-left shadow-lg sm:mx-0 sm:my-8 sm:p-6"
+      >
+        <div>
+          <div
+            class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
-            />
-          </svg>
-        </div>
-        <div class="mt-3 text-center sm:mt-5">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Oops! Something went wrong
-          </h3>
-          <div class="mt-2">
-            <p
-              class="text-sm text-gray-500"
-              x-text="$store.form.submitError"
-            ></p>
+            <svg
+              class="h-6 w-6 text-green-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+          </div>
+          <div class="mt-3 sm:mt-5">
+            <h3 class="text-center text-lg font-medium leading-6 text-gray-900">
+              Paste successfully created
+            </h3>
+            <div class="mt-5">
+              <div class="flex rounded-md shadow-sm">
+                <div
+                  class="relative flex flex-grow items-stretch focus-within:z-10"
+                >
+                  <div
+                    class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+                  >
+                    <svg
+                      class="h-5 w-5 text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="h-6 w-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="url"
+                    class="block w-full rounded-none rounded-l-md border-gray-200 pl-10 placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    :placeholder="$store.form.submitSuccess.link"
+                    readonly
+                  />
+                </div>
+                <button
+                  type="button"
+                  x-text="copyNoteLinkState"
+                  @click="copyNoteLink($store.form.submitSuccess.link)"
+                  class="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                >
+                  Copy
+                </button>
+              </div>
+              <p class="mt-3 text-sm text-gray-500">
+                <template x-if="$store.form.submitSuccess.expireText">
+                  <span>
+                    Your note will expire at
+                    <strong
+                      x-text="$store.form.submitSuccess.expireText"
+                      class="font-medium"
+                    ></strong>
+                  </span>
+                </template>
+                <template x-if="!$store.form.submitSuccess.expireText">
+                  <span>Your note will never expire.</span>
+                </template>
+              </p>
+            </div>
           </div>
         </div>
+        <div class="mt-5 flex justify-end sm:mt-6">
+          <button
+            type="button"
+            class="rounded-xl border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
+            @click="$store.form.newNote()"
+          >
+            New Note
+          </button>
+        </div>
       </div>
-      <div class="mt-5 sm:mt-6">
-        <button
-          type="button"
-          class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
-          @click="$store.form.tryAgain()"
-        >
-          Try Again
-        </button>
+    </div>
+  </div>
+</template>
+
+<!-- Failed Modal -->
+<template x-if="$store.form.submitError">
+  <div class="fixed inset-0 z-20">
+    <div
+      class="absolute inset-0 bg-white/30 backdrop-blur-sm transition-all"
+    ></div>
+    <div
+      class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform sm:max-w-md"
+    >
+      <div
+        class="mx-4 rounded-2xl border border-gray-100 bg-white px-4 pt-5 pb-4 text-left shadow-lg sm:mx-0 sm:my-8 sm:p-6"
+      >
+        <div>
+          <div
+            class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100"
+          >
+            <svg
+              class="h-6 w-6 text-red-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+              />
+            </svg>
+          </div>
+          <div class="mt-3 text-center sm:mt-5">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">
+              Oops! Something went wrong
+            </h3>
+            <div class="mt-2">
+              <p
+                class="text-sm text-gray-500"
+                x-text="$store.form.submitError"
+              ></p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 flex justify-end sm:mt-6">
+          <button
+            type="button"
+            class="rounded-xl border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
+            @click="$store.form.tryAgain()"
+          >
+            Try Again
+          </button>
+        </div>
       </div>
     </div>
   </div>

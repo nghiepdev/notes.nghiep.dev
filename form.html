@@ -20,7 +20,7 @@
         x-cloak
         x-model.number="$store.form.expireIn"
         :disabled="$store.form.submiting"
-        class="rounded-full border-gray-300 py-2 pl-3 pr-10 text-base text-gray-400 transition focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+        class="rounded-full border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-400 transition focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
       >
         <template x-for="option in expireIn" :key="option.value">
           <option
@@ -41,7 +41,7 @@
           <template x-if="!$store.form.disabled">
             <template x-if="$store.form.submiting">
               <svg
-                class="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+                class="-ml-1 mr-3 h-4 w-4 animate-spin text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
