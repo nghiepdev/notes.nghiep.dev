@@ -2,10 +2,10 @@
 <template x-if="$store.form.submitSuccess">
   <div class="fixed inset-0 z-20">
     <div
-      class="absolute inset-0 bg-white/30 backdrop-blur-sm transition-all"
+      class="absolute inset-0 bg-white/30 backdrop-blur-md transition-all"
     ></div>
     <div
-      class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform sm:max-w-md"
+      class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform sm:max-w-lg"
     >
       <div
         class="mx-4 rounded-2xl border border-gray-100 bg-white px-4 pt-5 pb-4 text-left shadow-lg sm:mx-0 sm:my-8 sm:p-6"
@@ -32,16 +32,14 @@
           </div>
           <div class="mt-3 sm:mt-5">
             <h3 class="text-center text-lg font-medium leading-6 text-gray-900">
-              Paste successfully created
+              Note successfully created
             </h3>
-            <div class="mt-5">
-              <div class="flex rounded-md shadow-sm">
+            <div class="mt-5 overflow-hidden">
+              <div class="flex overflow-hidden rounded-md shadow-sm">
                 <div
-                  class="relative flex flex-grow items-stretch focus-within:z-10"
+                  class="flex grow items-stretch overflow-hidden rounded-l-md border border-gray-200"
                 >
-                  <div
-                    class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-                  >
+                  <div class="pointer-events-none flex items-center px-3">
                     <svg
                       class="h-5 w-5 text-gray-400"
                       xmlns="http://www.w3.org/2000/svg"
@@ -58,12 +56,20 @@
                       />
                     </svg>
                   </div>
-                  <input
-                    type="url"
-                    class="block w-full rounded-none rounded-l-md border-gray-200 pl-10 placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    :placeholder="$store.form.submitSuccess.link"
-                    readonly
-                  />
+                  <div
+                    class="[&_input]:outline-none [&_input]:h-full [&_input]:placeholder:text-slate-400 flex grow items-center overflow-hidden text-slate-600 sm:text-sm"
+                  >
+                    <span x-text="$store.form.submitSuccess.origin"></span>
+                    <span>/</span>
+                    <div>
+                      <input
+                        :value="$store.form.submitSuccess.key"
+                        :placeholder="$store.form.submitSuccess.key"
+                      />
+                    </div>
+                    <span>/</span>
+                    <span>raw</span>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -109,10 +115,10 @@
 <template x-if="$store.form.submitError">
   <div class="fixed inset-0 z-20">
     <div
-      class="absolute inset-0 bg-white/30 backdrop-blur-sm transition-all"
+      class="absolute inset-0 bg-white/30 backdrop-blur-md transition-all"
     ></div>
     <div
-      class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform sm:max-w-md"
+      class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform sm:max-w-lg"
     >
       <div
         class="mx-4 rounded-2xl border border-gray-100 bg-white px-4 pt-5 pb-4 text-left shadow-lg sm:mx-0 sm:my-8 sm:p-6"

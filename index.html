@@ -197,7 +197,8 @@
               });
 
               formStore.submitSuccess = {
-                link: new URL(`/${response.key}/raw`, window.location.origin),
+                key: response.key,
+                origin: window.location.origin,
                 expireText:
                   response.__expires &&
                   new Date(response.__expires * 1000).toLocaleString(),
