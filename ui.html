@@ -232,7 +232,8 @@
                 throw new Error((await res.text()) || res.statusText);
               });
 
-              window.location.href = `/${response.key}`;
+              window.location.assign(`/${response.key}`);
+              formStore.toggleSubmiting(false);
             } catch (error) {
               formStore.toggleSubmiting(false);
               formStore.submitError = error.message;
