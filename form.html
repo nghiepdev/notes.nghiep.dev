@@ -1,10 +1,10 @@
-<form class="h-full w-full flex flex-col" x-data="app" @submit.prevent="submit">
+<form class="flex h-full w-full flex-col" @submit.prevent="submit">
   <div class="grow overflow-hidden shadow-sm">
     <label for="content" class="sr-only">Content</label>
     <textarea
       id="content"
       name="content"
-      class="block w-full h-full resize-none border-0 py-1 placeholder-gray-500 focus:ring-0 sm:text-sm"
+      class="block h-full w-full resize-none border-0 py-1 placeholder-gray-500 focus:ring-0 sm:text-sm"
       placeholder="Write a text..."
       spellcheck="false"
       autofocus
@@ -16,37 +16,32 @@
     <div
       class="flex items-center justify-between space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3"
     >
-      <div class="flex">
-        <button
-          type="button"
-          class="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400"
-        >
-          <select
-            x-model.number="$store.form.expireIn"
-            :disabled="$store.form.submiting"
-            class="block w-full rounded-full border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          >
-            <template x-for="option in expireIn" :key="option.value">
-              <option
-                :value="option.value"
-                x-text="option.label"
-                :selected="option.value === $store.form.expireIn"
-              ></option>
-            </template>
-          </select>
-        </button>
-      </div>
+      <select
+        x-cloak
+        x-model.number="$store.form.expireIn"
+        :disabled="$store.form.submiting"
+        class="rounded-full border-gray-300 py-2 pl-3 pr-10 text-base text-gray-400 transition focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+      >
+        <template x-for="option in expireIn" :key="option.value">
+          <option
+            :value="option.value"
+            x-text="option.label"
+            :selected="option.value === $store.form.expireIn"
+          ></option>
+        </template>
+      </select>
       <div class="flex-shrink-0">
         <button
+          x-cloak
           type="submit"
           :disabled="$store.form.disabled"
           :class="{'cursor-not-allowed': $store.form.submiting}"
-          class="disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+          class="[&[x-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
         >
           <template x-if="!$store.form.disabled">
             <template x-if="$store.form.submiting">
               <svg
-                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                class="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -67,9 +62,9 @@
               </svg>
             </template>
           </template>
-          <span
-            x-text="$store.form.submiting ?  'Creating...': 'Create'"
-          ></span>
+          <span x-text="$store.form.submiting ?  'Creating...': 'Create'">
+            Create
+          </span>
         </button>
       </div>
     </div>
@@ -77,9 +72,9 @@
 
   <!-- Failed Modal -->
   <template x-if="$store.form.submitError">
-    <div class="fixed z-20 inset-0 backdrop-blur-sm bg-white/30">
+    <div class="fixed inset-0 z-20 bg-white/30 backdrop-blur-sm">
       <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6 border border-gray-100"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform overflow-hidden rounded-lg border border-gray-100 bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
       >
         <div>
           <div

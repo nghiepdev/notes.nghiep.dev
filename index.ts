@@ -3,7 +3,7 @@ import {Deta} from 'deta';
 import fs from 'fs';
 
 import type {NoteText} from './types';
-import {META_HTML, META_DESCRIPTION} from './constants';
+import {META_TITLE, META_DESCRIPTION, EXPIRE_IN} from './constants';
 
 type NodeTextResponse = NoteText | null;
 
@@ -26,8 +26,10 @@ app.get('/', async (request, reply) => {
   const html = fs
     .readFileSync('./ui.html')
     .toString()
-    .replace(/{title_placeholder}/g, META_HTML)
+    .replace(/{title_placeholder}/g, META_TITLE)
+    .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
     .replace(/{description_placeholder}/g, META_DESCRIPTION)
+    .replace(/{expire_in_placeholder}/g, JSON.stringify(EXPIRE_IN))
     .replace(/{form_placeholder}/g, fs.readFileSync('./form.html').toString());
 
   reply.send(html);

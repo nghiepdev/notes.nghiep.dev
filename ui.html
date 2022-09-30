@@ -6,24 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
-      href="//api.iconify.design/fluent-emoji-flat/pencil.svg"
+      href="https://api.iconify.design/fluent-emoji-flat/pencil.svg"
       type="image/svg+xml"
     />
-    <title>{title_placeholder}</title>
+    <title>{title_no_markup_placeholder}</title>
     <meta name="description" content="{description_placeholder}" />
-    <meta property="og:title" content="{title_placeholder}" />
+    <meta property="og:title" content="{title_no_markup_placeholder}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://freetext.deta.dev" />
     <meta
       property="og:image"
-      content="//images.unsplash.com/photo-1527656855834-0235e41779fd?auto=format&fit=crop&w=1548&q=80"
+      content="https://images.unsplash.com/photo-1527656855834-0235e41779fd?auto=format&fit=crop&w=1548&q=80"
     />
     <script src="//cdn.tailwindcss.com?plugins=forms"></script>
     <script src="//unpkg.com/@alpinejs/persist@3"></script>
     <script src="//unpkg.com/alpinejs@3" defer></script>
   </head>
   <body>
-    <div class="font-sans bg-white flex flex-col min-h-screen w-full">
+    <div
+      x-data="app"
+      class="font-sans bg-white flex flex-col min-h-screen w-full [&_[x-cloak]]:opacity-0"
+    >
       <div>
         <div
           class="bg-gradient-to-r from-green-50/50 via-indigo-200/50 to-indigo-100/50 px-4 py-4"
@@ -65,22 +68,11 @@
           <div class="px-4 py-4 md:py-16">
             <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
               <h1
-                class="font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-16 md:mb-6"
+                x-cloak
+                x-html="titleMarkup"
+                class="transition font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-16 md:mb-6"
               >
-                The simplest way to keep text notes. Light, clean,
-                <span class="relative whitespace-nowrap text-orange-400">
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 418 42"
-                    class="absolute top-2/3 left-0 h-[0.58em] w-full fill-blue-300"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M203.371.916c-26.013-2.078-76.686 1.963-124.73 9.946L67.3 12.749C35.421 18.062 18.2 21.766 6.004 25.934 1.244 27.561.828 27.778.874 28.61c.07 1.214.828 1.121 9.595-1.176 9.072-2.377 17.15-3.92 39.246-7.496C123.565 7.986 157.869 4.492 195.942 5.046c7.461.108 19.25 1.696 19.17 2.582-.107 1.183-7.874 4.31-25.75 10.366-21.992 7.45-35.43 12.534-36.701 13.884-2.173 2.308-.202 4.407 4.442 4.734 2.654.187 3.263.157 15.593-.78 35.401-2.686 57.944-3.488 88.365-3.143 46.327.526 75.721 2.23 130.788 7.584 19.787 1.924 20.814 1.98 24.557 1.332l.066-.011c1.201-.203 1.53-1.825.399-2.335-2.911-1.31-4.893-1.604-22.048-3.261-57.509-5.556-87.871-7.36-132.059-7.842-23.239-.254-33.617-.116-50.627.674-11.629.54-42.371 2.494-46.696 2.967-2.359.259 8.133-3.625 26.504-9.81 23.239-7.825 27.934-10.149 28.304-14.005.417-4.348-3.529-6-16.878-7.066Z"
-                    ></path>
-                  </svg>
-                  <span class="relative">and free.</span>
-                </span>
+                {title_no_markup_placeholder}
               </h1>
 
               <p class="text-gray-600 md:text-xl md:px-18 hidden md:block">
@@ -97,7 +89,7 @@
             </div>
           </div>
           <svg
-            class="fill-current text-white hidden md:block"
+            class="fill-current text-white md:block"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
           >
@@ -109,7 +101,7 @@
         </div>
 
         <div
-          class="max-w-4xl lg:mx-auto bg-white shadow-lg relative z-20 hidden md:block rounded-[20px] -mt-[320px] sm:-mt-[200px] xl:-mt-[320px] 2xl:-mt-[400px] mx-4"
+          class="max-w-4xl lg:mx-auto bg-white shadow-lg relative z-20 md:block rounded-[20px] -mt-[120px] sm:-mt-[200px] xl:-mt-[320px] 2xl:-mt-[400px] mx-4"
         >
           <div
             class="h-20 w-20 rounded-full bg-yellow-500 absolute top-0 left-0 -ml-10 -mt-10 z-[-1]"
@@ -123,17 +115,6 @@
             class="h-10 bg-white rounded-t-lg border-b border-gray-100"
           ></div>
           <div class="flex h-[550px]">{form_placeholder}</div>
-        </div>
-
-        <div class="px-4 md:hidden">
-          <div
-            class="-mt-10 max-w-4xl mx-auto bg-white shadow-lg relative z-20 rounded-[20px]"
-          >
-            <div
-              class="h-10 bg-white rounded-t-lg border-b border-gray-100"
-            ></div>
-            <div class="flex h-[340px]">{form_placeholder}</div>
-          </div>
         </div>
 
         <p class="text-center p-4 text-gray-600 mt-10">
@@ -163,45 +144,27 @@
     <script>
       document.addEventListener('alpine:init', () => {
         Alpine.data('app', () => ({
-          expireIn: [
-            {
-              label: 'Never expired',
-              value: -1,
-            },
-            {
-              label: 'Expire in 10 Minutes',
-              value: 10 * 60,
-            },
-            {
-              label: 'Expire in 30 Minutes',
-              value: 30 * 60,
-            },
-            {
-              label: 'Expire in 1 Hour',
-              value: 1 * 60 * 60,
-            },
-            {
-              label: 'Expire in 1 Day',
-              value: 1 * 24 * 60 * 60,
-            },
-            {
-              label: 'Expire in 1 Week',
-              value: 1 * 7 * 24 * 60 * 60,
-            },
-            {
-              label: 'Expire in 1 Month',
-              value: 1 * 30 * 24 * 60 * 60,
-            },
-            {
-              label: 'Expire in 6 Months',
-              value: 6 * 30 * 24 * 60 * 60,
-            },
-            {
-              label: 'Expire in 1 Year',
-              value: 12 * 30 * 24 * 60 * 60,
-            },
-          ],
-
+          title: '{title_placeholder}',
+          descripton: '{description_placeholder}',
+          expireIn: {expire_in_placeholder},
+          get titleMarkup() {
+            return this.title.replace(/{(.*)}/g, (p, p1) => {
+              return `
+                <span class="relative whitespace-nowrap text-orange-400">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 418 42"
+                    class="absolute top-2/3 left-0 h-[0.58em] w-full fill-blue-300"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M203.371.916c-26.013-2.078-76.686 1.963-124.73 9.946L67.3 12.749C35.421 18.062 18.2 21.766 6.004 25.934 1.244 27.561.828 27.778.874 28.61c.07 1.214.828 1.121 9.595-1.176 9.072-2.377 17.15-3.92 39.246-7.496C123.565 7.986 157.869 4.492 195.942 5.046c7.461.108 19.25 1.696 19.17 2.582-.107 1.183-7.874 4.31-25.75 10.366-21.992 7.45-35.43 12.534-36.701 13.884-2.173 2.308-.202 4.407 4.442 4.734 2.654.187 3.263.157 15.593-.78 35.401-2.686 57.944-3.488 88.365-3.143 46.327.526 75.721 2.23 130.788 7.584 19.787 1.924 20.814 1.98 24.557 1.332l.066-.011c1.201-.203 1.53-1.825.399-2.335-2.911-1.31-4.893-1.604-22.048-3.261-57.509-5.556-87.871-7.36-132.059-7.842-23.239-.254-33.617-.116-50.627.674-11.629.54-42.371 2.494-46.696 2.967-2.359.259 8.133-3.625 26.504-9.81 23.239-7.825 27.934-10.149 28.304-14.005.417-4.348-3.529-6-16.878-7.066Z"
+                    ></path>
+                  </svg>
+                  <span class="relative">${p1}</span>
+                </span>`;
+            });
+          },
           async submit() {
             const formStore = Alpine.store('form');
             const targetUrl = new URL('/', window.location.origin);
