@@ -196,8 +196,6 @@
                 throw new Error((await res.text()) || res.statusText);
               });
 
-              console.log(response.__expires);
-
               formStore.submitSuccess = {
                 link: new URL(`/${response.key}/raw`, window.location.origin),
                 expireText:
@@ -223,6 +221,10 @@
             setTimeout(() => {
               this.copyNoteLinkState = 'Copy';
             }, 2000);
+          },
+          newNote() {
+            this.$refs.content.focus();
+            Alpine.store('form').newNote();
           },
         }));
 
