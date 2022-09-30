@@ -25,19 +25,19 @@
   <body>
     <div
       x-data="app"
-      class="font-sans bg-white flex flex-col min-h-screen w-full [&_[x-cloak]]:opacity-0"
+      class="[&_[x-cloak]]:opacity-0 flex min-h-screen w-full flex-col bg-white font-sans"
     >
       <div>
         <div
           class="bg-gradient-to-r from-green-50/50 via-indigo-200/50 to-indigo-100/50 px-4 py-4"
         >
           <div
-            class="w-full md:max-w-6xl md:mx-auto flex items-center justify-between"
+            class="flex w-full items-center justify-between md:mx-auto md:max-w-6xl"
           >
             <div>
               <a
                 href="#"
-                class="inline-block py-2 text-gray-800 text-2xl font-bold"
+                class="inline-block py-2 text-2xl font-bold text-gray-800"
               >
                 FreeText.
               </a>
@@ -47,14 +47,14 @@
               <a
                 href="https://t.me/nghiepit"
                 target="blank_telegram"
-                class="inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6"
+                class="mr-6 inline-block py-1 text-gray-500 hover:text-gray-600 md:py-4"
               >
                 About
               </a>
               <a
                 href="https://github.com/nghiepit/freetext"
                 target="blank_github"
-                class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-slate-50 rounded-lg"
+                class="inline-block rounded-lg bg-white py-2 px-4 text-gray-700 hover:bg-slate-50"
               >
                 Go to Github
               </a>
@@ -66,25 +66,25 @@
           class="bg-gradient-to-r from-green-50/50 via-indigo-200/50 to-indigo-100/50 md:overflow-hidden"
         >
           <div class="px-4 py-4 md:py-16">
-            <div class="relative w-full md:max-w-2xl md:mx-auto text-center">
+            <div class="relative w-full text-center md:mx-auto md:max-w-2xl">
               <h1
                 x-cloak
                 x-html="titleMarkup"
-                class="transition font-bold text-gray-700 text-xl sm:text-2xl md:text-5xl leading-tight mb-16 md:mb-6"
+                class="mb-16 text-xl font-bold leading-tight text-gray-700 transition sm:text-2xl md:mb-6 md:text-5xl"
               >
                 {title_no_markup_placeholder}
               </h1>
 
-              <p class="text-gray-600 md:text-xl md:px-18 hidden md:block">
+              <p class="md:px-18 hidden text-gray-600 md:block md:text-xl">
                 {description_placeholder}
               </p>
 
               <div
-                class="hidden md:block h-40 w-40 rounded-full bg-blue-800 absolute right-0 bottom-0 -mb-64 -mr-48"
+                class="absolute right-0 bottom-0 -mb-64 -mr-48 hidden h-40 w-40 rounded-full bg-blue-800 md:block"
               ></div>
 
               <div
-                class="hidden md:block h-5 w-5 rounded-full bg-yellow-500 absolute top-0 right-0 -mr-40 mt-32"
+                class="absolute top-0 right-0 -mr-40 mt-32 hidden h-5 w-5 rounded-full bg-yellow-500 md:block"
               ></div>
             </div>
           </div>
@@ -101,23 +101,23 @@
         </div>
 
         <div
-          class="max-w-4xl lg:mx-auto bg-white shadow-lg relative z-20 md:block rounded-[20px] -mt-[120px] sm:-mt-[200px] xl:-mt-[320px] 2xl:-mt-[400px] mx-4"
+          class="relative z-20 mx-4 -mt-[120px] max-w-4xl rounded-[20px] bg-white shadow-lg sm:-mt-[200px] md:block lg:mx-auto xl:-mt-[320px] 2xl:-mt-[400px]"
         >
           <div
-            class="h-20 w-20 rounded-full bg-yellow-500 absolute top-0 left-0 -ml-10 -mt-10 z-[-1]"
+            class="absolute top-0 left-0 z-[-1] -ml-10 -mt-10 h-20 w-20 rounded-full bg-yellow-500"
           ></div>
 
           <div
-            class="h-5 w-5 rounded-full bg-blue-500 absolute top-0 left-0 -ml-32 mt-12 z-[-1]"
+            class="absolute top-0 left-0 z-[-1] -ml-32 mt-12 h-5 w-5 rounded-full bg-blue-500"
           ></div>
 
           <div
-            class="h-10 bg-white rounded-t-lg border-b border-gray-100"
+            class="h-10 rounded-t-lg border-b border-gray-100 bg-white"
           ></div>
           <div class="flex h-[550px]">{form_placeholder}</div>
         </div>
 
-        <p class="text-center p-4 text-gray-600 mt-10">
+        <p class="mt-10 p-4 text-center text-gray-600">
           Created by
           <a
             class="border-b text-blue-500"
@@ -127,7 +127,7 @@
             ©12bay.vn
           </a>
           <span
-            class="hidden sm:inline-block before:content-['.'] after:content-['.'] before:-ml-1 after:-ml-1"
+            class="hidden before:-ml-1 before:content-['.'] after:-ml-1 after:content-['.'] sm:inline-block"
           >
             Inspired by TailwindCSS
             <a
