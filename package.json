@@ -11,7 +11,9 @@
   "dependencies": {
     "deta": "^1.1.0",
     "dotenv": "^16.0.2",
-    "fastify": "^4.6.0"
+    "fastify": "^4.6.0",
+    "is-plain-object": "^5.0.0",
+    "nanoid": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.23",
