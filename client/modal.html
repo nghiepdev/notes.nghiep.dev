@@ -34,8 +34,8 @@
             <h3 class="text-center text-lg font-medium leading-6 text-gray-900">
               Note successfully created
             </h3>
-            <div class="mt-5 overflow-hidden">
-              <div class="flex overflow-hidden rounded-md shadow-sm">
+            <div class="mt-5">
+              <div class="flex rounded-md shadow-sm">
                 <div
                   class="flex grow items-stretch overflow-hidden rounded-l-md border border-gray-200"
                 >
@@ -57,40 +57,50 @@
                     </svg>
                   </div>
                   <div
-                    class="[&_input]:outline-none [&_input]:h-full [&_input]:placeholder:text-slate-400 flex grow items-center overflow-hidden text-slate-600 sm:text-sm"
+                    class="flex grow cursor-default items-center overflow-hidden text-slate-500 sm:text-sm"
                   >
                     <span>{{store.submitSuccess.origin}}</span>
                     <span>/</span>
-                    <div>
-                      <input
-                        :value="store.submitSuccess.key"
-                        :placeholder="store.submitSuccess.key"
-                      />
-                    </div>
+                    <span
+                      ref="aliasPath"
+                      contenteditable
+                      spellcheck="false"
+                      class="cursor-text overflow-hidden whitespace-nowrap border border-dashed border-red-300 transition focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                    >
+                      {{store.submitSuccess.key}}
+                    </span>
                     <span>/</span>
-                    <span>raw</span>
+                    <span class="grow pr-2">raw</span>
                   </div>
                 </div>
                 <button
                   type="button"
-                  @click="copyNoteLink(store.submitSuccess.link)"
-                  class="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  @click="copyNoteLink(store.submitSuccess)"
+                  :class="{'cursor-not-allowed': store.copyNoteLinkState !== 'Copy'}"
+                  class="relative -ml-1 rounded-r-md border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
-                  {{copyNoteLinkState}}
+                  {{store.copyNoteLinkState}}
                 </button>
               </div>
+              <p
+                v-if="store.copyError"
+                class="mt-3 border-l-2 border-red-500 bg-slate-50 px-2 py-1 text-sm text-red-400"
+              >
+                {{store.copyError}}
+              </p>
               <p class="mt-3 text-sm text-gray-500">
-                <template v-if="store.submitSuccess.expireText">
-                  <span>
-                    Your note will expire at
-                    <strong class="font-medium">
-                      {{store.submitSuccess.expireText}}
-                    </strong>
-                  </span>
-                </template>
-                <template v-if="!store.submitSuccess.expireText">
-                  <span>Your note will never expire.</span>
-                </template>
+                <span v-if="store.submitSuccess.expireText">
+                  Your note will expire at
+                  <strong class="font-medium">
+                    {{store.submitSuccess.expireText}}
+                  </strong>
+                </span>
+                <span v-else>Your note will never expire.</span>
+              </p>
+              <p
+                class="mt-3 border-l-2 border-green-500 bg-slate-100 px-2 py-1 text-sm text-gray-500"
+              >
+                You can also adjust the URL path to be more friendly.
               </p>
             </div>
           </div>

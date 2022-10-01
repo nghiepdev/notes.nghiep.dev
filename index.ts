@@ -104,7 +104,7 @@ app.post<{
   Body: DetaType | PostNoteText;
 }>('/', async (request, reply) => {
   const isJson = request.headers['content-type'] === 'application/json';
-  const secret = nanoid(12);
+  const secret = nanoid(10);
   let value = request.body;
   let expireIn = 0;
 
@@ -170,16 +170,17 @@ app.put<{
   const {key, secret} = request.params;
   const {alias} = request.body;
 
+  if (!alias || alias.length < 3) {
+    return reply.status(422).send({
+      message: 'Alias is too short.',
+    });
+  }
+
   const note = await fetchNoteBySecretKey(secret);
 
-  if (alias && note && note.key === key) {
+  if (note && note.key === key) {
     // Validate alias exists
-    const {items} = await db.fetch(
-      {__alias: alias},
-      {
-        limit: 1,
-      },
-    );
+    const {items} = await db.fetch({__alias: alias}, {limit: 1});
 
     if (items.length) {
       return reply.status(422).send({
@@ -187,18 +188,11 @@ app.put<{
       });
     }
 
-    await db.update(
-      {
-        ...(alias
-          ? {
-              __alias: alias,
-            }
-          : {}),
-      },
-      key,
-    );
+    await db.update({__alias: alias}, key);
 
-    return reply.redirect(`/${key}`);
+    reply.send({
+      message: 'Alias has been successfully updated',
+    });
   }
 
   reply.status(404).send({

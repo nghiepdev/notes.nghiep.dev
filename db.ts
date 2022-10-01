@@ -10,12 +10,7 @@ export const db = deta.Base(
 );
 
 export async function fetchNoteBySecretKey(__secret: string) {
-  const {items} = await db.fetch(
-    {__secret},
-    {
-      limit: 1,
-    },
-  );
+  const {items} = await db.fetch({__secret}, {limit: 1});
 
   return items[0] as NodeTextResponse;
 }
@@ -27,12 +22,7 @@ export async function fetchNoteByKey(key: string) {
     return result;
   }
 
-  const {items} = await db.fetch(
-    {__alias: key},
-    {
-      limit: 1,
-    },
-  );
+  const {items} = await db.fetch({__alias: key}, {limit: 1});
 
   return items[0] as NodeTextResponse;
 }
