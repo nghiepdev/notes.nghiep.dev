@@ -1,5 +1,5 @@
 <!-- Success Modal -->
-<template x-if="$store.form.submitSuccess">
+<template v-if="store.submitSuccess">
   <div class="fixed inset-0 z-20">
     <div
       class="absolute inset-0 bg-white/30 backdrop-blur-md transition-all"
@@ -59,12 +59,12 @@
                   <div
                     class="[&_input]:outline-none [&_input]:h-full [&_input]:placeholder:text-slate-400 flex grow items-center overflow-hidden text-slate-600 sm:text-sm"
                   >
-                    <span x-text="$store.form.submitSuccess.origin"></span>
+                    <span>{{store.submitSuccess.origin}}</span>
                     <span>/</span>
                     <div>
                       <input
-                        :value="$store.form.submitSuccess.key"
-                        :placeholder="$store.form.submitSuccess.key"
+                        :value="store.submitSuccess.key"
+                        :placeholder="store.submitSuccess.key"
                       />
                     </div>
                     <span>/</span>
@@ -73,24 +73,22 @@
                 </div>
                 <button
                   type="button"
-                  x-text="copyNoteLinkState"
-                  @click="copyNoteLink($store.form.submitSuccess.link)"
+                  @click="copyNoteLink(store.submitSuccess.link)"
                   class="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
-                  Copy
+                  {{copyNoteLinkState}}
                 </button>
               </div>
               <p class="mt-3 text-sm text-gray-500">
-                <template x-if="$store.form.submitSuccess.expireText">
+                <template v-if="store.submitSuccess.expireText">
                   <span>
                     Your note will expire at
-                    <strong
-                      x-text="$store.form.submitSuccess.expireText"
-                      class="font-medium"
-                    ></strong>
+                    <strong class="font-medium">
+                      {{store.submitSuccess.expireText}}
+                    </strong>
                   </span>
                 </template>
-                <template x-if="!$store.form.submitSuccess.expireText">
+                <template v-if="!store.submitSuccess.expireText">
                   <span>Your note will never expire.</span>
                 </template>
               </p>
@@ -112,7 +110,7 @@
 </template>
 
 <!-- Failed Modal -->
-<template x-if="$store.form.submitError">
+<template v-if="store.submitError">
   <div class="fixed inset-0 z-20">
     <div
       class="absolute inset-0 bg-white/30 backdrop-blur-md transition-all"
@@ -148,10 +146,7 @@
               Oops! Something went wrong
             </h3>
             <div class="mt-2">
-              <p
-                class="text-sm text-gray-500"
-                x-text="$store.form.submitError"
-              ></p>
+              <p class="text-sm text-red-400">{{store.submitError}}</p>
             </div>
           </div>
         </div>
@@ -159,7 +154,7 @@
           <button
             type="button"
             class="rounded-xl border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
-            @click="$store.form.tryAgain()"
+            @click="retryNote"
           >
             Try Again
           </button>

@@ -18,24 +18,45 @@ const db = deta.Base(
   `${process.env.APP_NAME}:${process.env.NODE_ENV || 'default'}`,
 );
 
-app.get('/', async (request, reply) => {
-  reply.headers({
-    'content-type': 'text/html;charset=UTF-8',
-  });
-
-  const html = fs
-    .readFileSync('./index.html')
+function getClientHtml() {
+  let clientHtml = fs
+    .readFileSync('./client/index.html')
     .toString()
     .replace(/{title_placeholder}/g, META_TITLE)
     .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
     .replace(/{description_placeholder}/g, META_DESCRIPTION)
     .replace(/{expire_in_placeholder}/g, JSON.stringify(EXPIRE_IN))
-    .replace('{form_placeholder}', fs.readFileSync('./form.html').toString())
     .replace(
-      '{template_placeholder}',
-      fs.readFileSync('./template.html').toString(),
+      '{form_placeholder}',
+      fs.readFileSync('./client/form.html').toString(),
+    )
+    .replace(
+      '{modal_placeholder}',
+      fs.readFileSync('./client/modal.html').toString(),
     );
-  reply.send(html);
+
+  if (!__DEV) {
+    clientHtml = clientHtml.replace(
+      'vue.esm-browser.js',
+      'vue.esm-browser.prod.js',
+    );
+  }
+
+  return clientHtml;
+}
+
+const clientHtml = getClientHtml();
+
+app.get('/', async (request, reply) => {
+  reply.headers({
+    'content-type': 'text/html;charset=UTF-8',
+  });
+
+  if (__DEV) {
+    reply.send(getClientHtml());
+  } else {
+    reply.send(clientHtml);
+  }
 });
 
 app.get<{

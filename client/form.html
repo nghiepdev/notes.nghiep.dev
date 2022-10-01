@@ -3,13 +3,13 @@
     <label for="content" class="sr-only">Content</label>
     <textarea
       id="content"
-      x-ref="content"
+      ref="content"
       class="block h-full w-full resize-none border-0 py-1 placeholder:text-slate-400 focus:ring-0 sm:text-sm"
       placeholder="Write a text..."
       spellcheck="false"
-      autofocus
-      x-model="$store.form.content"
-      :disabled="$store.form.submiting"
+      v-focus
+      v-model.trim="store.content"
+      :disabled="store.submiting"
     ></textarea>
   </div>
   <div class="inset-x-px bottom-0">
@@ -17,29 +17,25 @@
       class="flex items-center justify-between space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3"
     >
       <select
-        x-cloak
-        x-model.number="$store.form.expireIn"
-        :disabled="$store.form.submiting"
+        v-cloak
+        v-model.number="store.expireIn"
+        :disabled="store.submiting"
         class="rounded-full border-gray-300 py-2 pl-3 pr-10 text-sm text-gray-400 transition focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
       >
-        <template x-for="option in expireIn" :key="option.value">
-          <option
-            :value="option.value"
-            x-text="option.label"
-            :selected="option.value === $store.form.expireIn"
-          ></option>
+        <template v-for="option in expireInOptions" :key="option.value">
+          <option :value="option.value">{{option.label}}</option>
         </template>
       </select>
       <div class="flex-shrink-0">
         <button
-          x-cloak
+          v-cloak
           type="submit"
-          :disabled="$store.form.disabled"
-          :class="{'cursor-not-allowed': $store.form.submiting}"
-          class="[&[x-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
+          :disabled="store.disabled"
+          :class="{'cursor-not-allowed': store.submiting}"
+          class="[&[v-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
         >
-          <template x-if="!$store.form.disabled">
-            <template x-if="$store.form.submiting">
+          <template v-if="!store.disabled">
+            <template v-if="store.submiting">
               <svg
                 class="-ml-1 mr-3 h-4 w-4 animate-spin text-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +58,7 @@
               </svg>
             </template>
           </template>
-          <span x-text="$store.form.submiting ?  'Creating...': 'Create'">
-            Create
-          </span>
+          <span>{{store.submiting ? 'Creating...': 'Create'}}</span>
         </button>
       </div>
     </div>
