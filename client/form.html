@@ -4,7 +4,7 @@
     <textarea
       id="content"
       ref="content"
-      class="ios:focus:text-base ios:focus-within:text-base block h-full w-full resize-none border-0 py-1 text-sm placeholder:text-sm placeholder:text-slate-400 focus:ring-0"
+      class="ios:focus:text-base block h-full w-full resize-none border-0 py-1 text-sm placeholder:text-sm placeholder:text-slate-400 focus:ring-0"
       placeholder="Write a text..."
       spellcheck="false"
       v-focus
@@ -34,14 +34,13 @@
           :class="{'cursor-not-allowed': store.submiting}"
           class="[&[v-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
         >
-          <template v-if="!store.disabled && store.submiting">
-            <iconify-icon
-              icon="gg:spinner"
-              width="20"
-              height="20"
-              class="-ml-1 mr-2 animate-spin text-white"
-            ></iconify-icon>
-          </template>
+          <iconify-icon
+            v-show="!store.disabled && store.submiting"
+            icon="gg:spinner"
+            width="20"
+            height="20"
+            class="-ml-1 mr-2 animate-spin text-white"
+          ></iconify-icon>
           <span>{{store.submiting ? 'Creating...': 'Create'}}</span>
         </button>
       </div>

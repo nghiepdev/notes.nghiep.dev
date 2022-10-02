@@ -25,7 +25,9 @@
         theme: {
           extend: {
             screens: {
-              xs: '475px',
+              xs: {
+                max: '420px',
+              },
               ios: {raw: '(hover: none) and (pointer: coarse)'},
             },
           },
@@ -79,7 +81,6 @@
           <div class="px-4 py-4 md:py-16">
             <div class="relative w-full text-center md:mx-auto md:max-w-2xl">
               <h1
-                v-cloak
                 v-html="titleMarkup"
                 class="mb-16 text-xl font-bold leading-tight text-gray-700 transition sm:text-2xl md:mb-6 md:text-5xl"
               >
@@ -242,15 +243,13 @@
           },
           selection: {
             mounted: (el, binding) => {
-              if (window.getSelection) {
-                el.addEventListener('click', () => {
-                  const selection = window.getSelection();
-                  const range = document.createRange();
-                  selection.removeAllRanges();
-                  range.selectNodeContents(el);
-                  selection.addRange(range);
-                });
-              }
+              el.addEventListener('click', () => {
+                const selection = window.getSelection();
+                const range = document.createRange();
+                selection.removeAllRanges();
+                range.selectNodeContents(el);
+                selection.addRange(range);
+              });
             },
           },
         },
