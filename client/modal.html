@@ -25,7 +25,7 @@
               Note successfully created
             </h3>
             <div class="mt-5">
-              <div class="flex rounded-md shadow-sm">
+              <div class="flex rounded-md text-sm shadow-sm">
                 <div
                   class="flex grow items-stretch overflow-hidden rounded-l-md border border-gray-200"
                 >
@@ -37,7 +37,7 @@
                     ></iconify-icon>
                   </div>
                   <div
-                    class="flex grow cursor-default items-center overflow-hidden text-sm text-slate-500"
+                    class="ios:focus:text-base ios:focus-within:text-base flex grow cursor-default items-center overflow-hidden text-slate-500"
                   >
                     <span class="xs:inline-block hidden">
                       {{store.submitSuccess.origin}}
@@ -59,7 +59,7 @@
                   type="button"
                   @click="copyNoteLink(store.submitSuccess)"
                   :class="{'cursor-not-allowed': store.copyNoteLinkState !== 'Copy'}"
-                  class="relative -ml-1 rounded-r-md border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  class="relative -ml-1 rounded-r-md border border-gray-200 bg-gray-50 px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:px-4"
                 >
                   {{store.copyNoteLinkState}}
                 </button>

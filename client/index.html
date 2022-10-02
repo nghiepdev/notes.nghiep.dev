@@ -19,13 +19,14 @@
       content="https://images.unsplash.com/photo-1527656855834-0235e41779fd?auto=format&fit=crop&w=1548&q=80"
     />
     <script src="//cdn.tailwindcss.com?plugins=forms"></script>
-    <script src="//unpkg.com/iconify-icon@1"></script>
+    <script src="//unpkg.com/iconify-icon@1" async></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             screens: {
               xs: '475px',
+              ios: {raw: '(hover: none) and (pointer: coarse)'},
             },
           },
         },
@@ -53,7 +54,7 @@
               </a>
             </div>
 
-            <div class="md:block">
+            <div class="text-sm sm:text-base md:block">
               <a
                 href="https://t.me/nghiepit"
                 target="blank_telegram"
@@ -127,7 +128,7 @@
           <div class="flex h-[340px] sm:h-[550px]">{form_placeholder}</div>
         </div>
 
-        <p class="mt-10 p-4 text-center text-gray-600">
+        <p class="mt-10 p-4 text-center text-sm text-gray-600 sm:text-base">
           Created by
           <a
             class="border-b text-blue-500"
