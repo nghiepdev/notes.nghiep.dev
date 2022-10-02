@@ -172,7 +172,7 @@ app.put<{
 
   if (!alias || alias.length < 3) {
     return reply.status(422).send({
-      message: 'Alias is too short.',
+      message: 'The alias is too short',
     });
   }
 
@@ -184,14 +184,14 @@ app.put<{
 
     if (items.length) {
       return reply.status(422).send({
-        message: 'Alias is already taken. Please try another.',
+        message: 'The alias is already taken',
       });
     }
 
     await db.update({__alias: alias}, key);
 
     reply.send({
-      message: 'Alias has been successfully updated',
+      message: 'The alias has been successfully updated',
     });
   }
 

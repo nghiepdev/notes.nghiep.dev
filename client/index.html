@@ -249,6 +249,7 @@
               });
               this.store.submitSuccess = {
                 key: response.key,
+                alias: response.key,
                 __secret: response.__secret,
                 origin: window.location.origin,
                 expireText:
@@ -263,7 +264,7 @@
           copyToClipboard(value) {
             return navigator.clipboard.writeText(value);
           },
-          async copyNoteLink({key, __secret, origin}) {
+          async copyNoteLink({key, alias: currentAlias, __secret, origin}) {
             if (this.store.copyNoteLinkState !== 'Copy') {
               return;
             }
@@ -271,7 +272,7 @@
             const link = new URL(`/${key}/raw`, origin);
             const aliasPath = this.$refs.aliasPath.textContent;
 
-            if (aliasPath !== key) {
+            if (aliasPath !== currentAlias) {
               this.store.copyNoteLinkState = 'Saving';
               try {
                 const response = await fetch(`/${key}/${__secret}`, {
@@ -300,6 +301,7 @@
 
                 link.pathname = `/${aliasPath}/raw`;
                 this.store.copyError = null;
+                this.store.submitSuccess.alias = aliasPath;
               } catch (error) {
                 this.store.copyError = error.message;
               }
