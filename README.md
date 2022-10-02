@@ -1,10 +1,12 @@
 # FREE TEXT NOTES
 
 > The simplest way to keep text notes. Light, clean, and free.  
-> This free online notepad allows you to create notes in a web browser. No sign up required. Free forever. Never expired.  
+> No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.  
 > https://freetext.deta.dev
 
 ![FreeText](./screenshot.png)
+
+The app targets modern browsers. Using JavaScript modules and ES6 features and more.
 
 ## API
 
