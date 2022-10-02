@@ -141,6 +141,7 @@
       {modal_placeholder}
     </div>
     <script type="module">
+      import ky from 'https://unpkg.com/ky';
       import {
         createApp,
         reactive,
@@ -148,6 +149,21 @@
       } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
       const EXPIRE_IN = 'expireIn';
+
+      const fetch = ky.create({
+        hooks: {
+          beforeError: [
+            async error => {
+              try {
+                const {message} = await error.response.json();
+                error.message = message || error.message;
+              } catch (error) {}
+
+              return error;
+            },
+          ],
+        },
+      });
 
       const store = reactive({
         content: '',
@@ -222,39 +238,23 @@
 
             try {
               this.store.toggleSubmiting(true);
-              const response = await fetch('/', {
-                method: 'post',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+              const response = await fetch.post('/', {
+                json: {
                   value: content,
                   expire_in: expireIn && expireIn > 0 ? expireIn : undefined,
-                }),
-              }).then(async res => {
-                if (res.ok) {
-                  try {
-                    return await res.json();
-                  } catch {}
-                  return await res.text();
-                }
-
-                throw await (async () => {
-                  try {
-                    return await res.json();
-                  } catch {
-                    return await res.text();
-                  }
-                })();
+                },
               });
+
+              const result = await response.json();
+
               this.store.submitSuccess = {
-                key: response.key,
-                alias: response.key,
-                __secret: response.__secret,
+                key: result.key,
+                alias: result.key,
+                __secret: result.__secret,
                 origin: window.location.origin,
                 expireText:
-                  response.__expires &&
-                  new Date(response.__expires * 1000).toLocaleString(),
+                  result.__expires &&
+                  new Date(result.__expires * 1000).toLocaleString(),
               };
             } catch (error) {
               this.store.submitError = error.message;
@@ -275,29 +275,13 @@
             if (aliasPath !== currentAlias) {
               this.store.copyNoteLinkState = 'Saving';
               try {
-                const response = await fetch(`/${key}/${__secret}`, {
-                  method: 'put',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
+                const response = await fetch.put(`/${key}/${__secret}`, {
+                  json: {
                     alias: aliasPath,
-                  }),
-                }).then(async res => {
-                  if (res.ok) {
-                    try {
-                      return await res.json();
-                    } catch {}
-                    return await res.text();
-                  }
-                  throw await (async () => {
-                    try {
-                      return await res.json();
-                    } catch {
-                      return await res.text();
-                    }
-                  })();
+                  },
                 });
+
+                // const result = await response.json();
 
                 link.pathname = `/${aliasPath}/raw`;
                 this.store.copyError = null;

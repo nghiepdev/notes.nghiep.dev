@@ -190,7 +190,7 @@ app.put<{
 
     await db.update({__alias: alias}, key);
 
-    reply.send({
+    return reply.send({
       message: 'The alias has been successfully updated',
     });
   }
