@@ -240,6 +240,19 @@
           focus: {
             mounted: el => el.focus(),
           },
+          selection: {
+            mounted: (el, binding) => {
+              if (window.getSelection) {
+                el.addEventListener('click', () => {
+                  const selection = window.getSelection();
+                  const range = document.createRange();
+                  selection.removeAllRanges();
+                  range.selectNodeContents(el);
+                  selection.addRange(range);
+                });
+              }
+            },
+          },
         },
         methods: {
           async submit() {
@@ -275,7 +288,7 @@
             this.store.toggleSubmiting(false);
           },
           copyToClipboard(value) {
-            return navigator.clipboard.writeText(value);
+            setTimeout(async () => await navigator.clipboard.writeText(value));
           },
           async copyNoteLink({key, alias: currentAlias, __secret, origin}) {
             if (this.store.copyNoteLinkState !== 'Copy') {
