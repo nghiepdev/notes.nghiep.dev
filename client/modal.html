@@ -39,7 +39,9 @@
                   <div
                     class="ios:focus:text-base ios:focus-within:text-base flex grow cursor-default items-center overflow-hidden text-slate-500"
                   >
-                    <span class="xs:truncate xs:shrink xs:min-w-[50px]">
+                    <span
+                      class="xs:min-w-[50px] xs:shrink overflow-hidden whitespace-nowrap"
+                    >
                       {{store.submitSuccess.origin}}
                     </span>
                     <span>/</span>
@@ -58,7 +60,7 @@
                 </div>
                 <button
                   type="button"
-                  @click="copyNoteLink(store.submitSuccess)"
+                  @click="copyNoteLink"
                   :class="{'cursor-not-allowed': store.copyNoteLinkState !== 'Copy'}"
                   class="relative -ml-1 rounded-r-md border border-gray-200 bg-gray-50 px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:px-4"
                 >

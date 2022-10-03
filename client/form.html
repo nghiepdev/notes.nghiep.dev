@@ -1,5 +1,8 @@
 <form class="flex h-full w-full flex-col" @submit.prevent="submit">
-  <div class="grow overflow-hidden shadow-sm">
+  <div
+    v-cloak
+    class="[&[v-cloak]]:opacity-100 [&[v-cloak]]:after:absolute [&[v-cloak]]:before:absolute [&[v-cloak]]:before:inset-0 [&[v-cloak]]:after:top-1/2 [&[v-cloak]]:after:left-1/2 [&[v-cloak]]:after:-translate-x-1/2 [&[v-cloak]]:after:-translate-y-1/2 [&[v-cloak]]:after:content-['loading...'] [&[v-cloak]]:after:text-slate-400 [&[v-cloak]]:after:text-sm overflow-hidde relative grow shadow-sm"
+  >
     <label for="content" class="sr-only">Content</label>
     <textarea
       id="content"

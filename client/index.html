@@ -164,6 +164,10 @@
 
       const EXPIRE_IN = 'expireIn';
 
+      const isIOS =
+        /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
       const fetch = ky.create({
         hooks: {
           beforeError: [
@@ -289,13 +293,25 @@
           copyToClipboard(value) {
             setTimeout(async () => await navigator.clipboard.writeText(value));
           },
-          async copyNoteLink({key, alias: currentAlias, __secret, origin}) {
+          async copyNoteLink() {
+            const {
+              key,
+              alias: currentAlias,
+              __secret,
+              origin,
+            } = this.store.submitSuccess;
+
             if (this.store.copyNoteLinkState !== 'Copy') {
               return;
             }
 
             const link = new URL(`/${key}/raw`, origin);
             const aliasPath = this.$refs.aliasPath.textContent;
+
+            if (isIOS) {
+              link.pathname = `/${aliasPath}/raw`;
+              this.copyToClipboard(link.toString());
+            }
 
             if (aliasPath !== currentAlias) {
               this.store.copyNoteLinkState = 'Saving';
