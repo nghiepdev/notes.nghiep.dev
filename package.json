@@ -5,8 +5,8 @@
   "homepage": "https://freetext.dete.dev",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
-    "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only index",
-    "build": "tsc --noEmit false"
+    "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only src",
+    "build": "tsc --noEmit false && cp -r src/client client"
   },
   "dependencies": {
     "deta": "^1.1.0",

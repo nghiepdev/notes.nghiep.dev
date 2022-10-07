@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import {nanoid} from 'nanoid';
 import Fastify, {FastifyListenOptions} from 'fastify';
 import {isPlainObject} from 'is-plain-object';
@@ -18,7 +19,7 @@ const app = Fastify({
 
 function getClientHtml() {
   let clientHtml = fs
-    .readFileSync('./client/index.html')
+    .readFileSync(path.resolve(__dirname, './client/index.html'))
     .toString()
     .replace(/{title_placeholder}/g, META_TITLE)
     .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
@@ -26,11 +27,13 @@ function getClientHtml() {
     .replace(/{expire_in_placeholder}/g, JSON.stringify(EXPIRE_IN))
     .replace(
       '{form_placeholder}',
-      fs.readFileSync('./client/form.html').toString(),
+      fs.readFileSync(path.resolve(__dirname, './client/form.html')).toString(),
     )
     .replace(
       '{modal_placeholder}',
-      fs.readFileSync('./client/modal.html').toString(),
+      fs
+        .readFileSync(path.resolve(__dirname, './client/modal.html'))
+        .toString(),
     );
 
   if (!__DEV) {

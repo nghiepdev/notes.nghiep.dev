@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "rootDir": "src",
+    "outDir": ".",
     "baseUrl": ".",
     "noEmit": true,
     "strict": true,
@@ -10,9 +12,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "incremental": true,
+    "incremental": false,
     "noUnusedLocals": true
   },
   "ts-node": {
