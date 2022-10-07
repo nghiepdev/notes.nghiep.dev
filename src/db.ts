@@ -1,4 +1,5 @@
 import {Deta} from 'deta';
+
 import {NoteText} from './types';
 
 const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
@@ -25,4 +26,13 @@ export async function fetchNoteByKey(key: string) {
   const {items} = await db.fetch({__alias: key}, {limit: 1});
 
   return items[0] as NodeTextResponse;
+}
+
+export function incrementNoteViewCount(note: NoteText) {
+  return db.update(
+    {
+      __views: db.util.increment(1),
+    },
+    note.key,
+  );
 }

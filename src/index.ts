@@ -1,13 +1,16 @@
-import fs from 'fs';
-import path from 'path';
 import {nanoid} from 'nanoid';
 import Fastify, {FastifyListenOptions} from 'fastify';
 import {isPlainObject} from 'is-plain-object';
 import type {DetaType} from 'deta/dist/types/types/basic';
 
 import type {NoteText, PostNoteText} from './types';
-import {META_TITLE, META_DESCRIPTION, EXPIRE_IN} from './constants';
-import {db, fetchNoteByKey, fetchNoteBySecretKey} from './db';
+import {
+  db,
+  fetchNoteByKey,
+  fetchNoteBySecretKey,
+  incrementNoteViewCount,
+} from './db';
+import {getClientHtml} from './utils';
 
 type NodeTextResponse = NoteText | null;
 
@@ -17,43 +20,21 @@ const app = Fastify({
   bodyLimit: 100 * 1024 * 1024, // 100MiB
 });
 
-function getClientHtml() {
-  let clientHtml = fs
-    .readFileSync(path.resolve(__dirname, './client/index.html'))
-    .toString()
-    .replace(/{title_placeholder}/g, META_TITLE)
-    .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
-    .replace(/{description_placeholder}/g, META_DESCRIPTION)
-    .replace(/{expire_in_placeholder}/g, JSON.stringify(EXPIRE_IN))
-    .replace(
-      '{form_placeholder}',
-      fs.readFileSync(path.resolve(__dirname, './client/form.html')).toString(),
-    )
-    .replace(
-      '{modal_placeholder}',
-      fs
-        .readFileSync(path.resolve(__dirname, './client/modal.html'))
-        .toString(),
-    );
+const clientHtml = getClientHtml({
+  shouldReplace: true,
+});
 
-  if (!__DEV) {
-    clientHtml = clientHtml.replace(
-      'vue.esm-browser.js',
-      'vue.esm-browser.prod.js',
-    );
-  }
-
-  return clientHtml;
-}
-
-const clientHtml = getClientHtml();
 app.get('/', async (request, reply) => {
   reply.headers({
     'content-type': 'text/html;charset=UTF-8',
   });
 
   if (__DEV) {
-    return reply.send(getClientHtml());
+    return reply.send(
+      getClientHtml({
+        shouldReplace: false,
+      }),
+    );
   }
 
   reply.send(clientHtml);
@@ -67,12 +48,15 @@ app.get<{
   const result = await fetchNoteByKey(request.params.key);
 
   if (result) {
+    await incrementNoteViewCount(result);
+
     return reply.send({
       __raw: `${request.protocol}://${request.hostname}/${
         result.__alias || result.key
       }/raw`,
       ...result,
       __secret: undefined,
+      __views: (result.__views || 0) + 1,
     });
   }
 
@@ -89,7 +73,10 @@ app.get<{
   const result = await fetchNoteByKey(request.params.key);
 
   if (result) {
-    const {key, __expires, value, __secret, __alias, ...restData} = result;
+    await incrementNoteViewCount(result);
+
+    const {key, __expires, value, __secret, __alias, __views, ...restData} =
+      result;
 
     if (value) {
       return reply.send(value);
@@ -117,6 +104,7 @@ app.post<{
     // Delete key and __secret
     delete body.key;
     delete body.__secret;
+    delete body.__views;
 
     if (body.value) {
       value = body.value;
@@ -131,8 +119,9 @@ app.post<{
     }
   }
 
-  const content: Record<string, unknown> = {
+  const content: Partial<Pick<NoteText, '__secret' | '__views' | 'value'>> = {
     __secret: secret,
+    __views: 0,
   };
 
   if (isPlainObject(value)) {

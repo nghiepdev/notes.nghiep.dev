@@ -206,7 +206,7 @@ dist
 /*.js
 !tailwind.config.js
 !prettier.config.js
-/client
+/templates
 
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,node
