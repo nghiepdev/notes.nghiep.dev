@@ -6,7 +6,8 @@
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only src",
-    "build": "tsc --noEmit false && cp -r src/client client"
+    "build": "yarn -s clean && tsc --noEmit false && cp -r src/client client",
+    "clean": "git clean -xf *.js client"
   },
   "dependencies": {
     "deta": "^1.1.0",
