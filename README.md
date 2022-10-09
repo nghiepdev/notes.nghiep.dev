@@ -1,4 +1,4 @@
-# FREE TEXT NOTES
+# FREE TEXT APP
 
 > The simplest way to keep text notes. Light, clean, and free.  
 > No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.  
