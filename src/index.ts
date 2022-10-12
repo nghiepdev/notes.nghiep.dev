@@ -75,8 +75,16 @@ app.get<{
   if (result) {
     await increaseNoteViewCount(result);
 
-    const {key, __expires, value, __secret, __alias, __views, ...restData} =
-      result;
+    const {
+      key,
+      value,
+      __expires,
+      __secret,
+      __alias,
+      __views,
+      __created_at,
+      ...restData
+    } = result;
 
     if (value) {
       return reply.send(value);
@@ -105,6 +113,7 @@ app.post<{
     delete body.key;
     delete body.__secret;
     delete body.__views;
+    delete body.__created_at;
 
     if (body.value) {
       value = body.value;
@@ -119,9 +128,12 @@ app.post<{
     }
   }
 
-  const content: Partial<Pick<NoteText, '__secret' | '__views' | 'value'>> = {
+  const content: Partial<
+    Pick<NoteText, '__secret' | '__views' | '__created_at' | 'value'>
+  > = {
     __secret: secret,
     __views: 0,
+    __created_at: Math.floor(+new Date() / 1000),
   };
 
   if (isPlainObject(value)) {

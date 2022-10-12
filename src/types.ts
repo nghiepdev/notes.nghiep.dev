@@ -6,6 +6,7 @@ interface BaseNoteText {
   __expires?: number;
   __alias?: string;
   __views: number;
+  __created_at: number;
 }
 
 export type NoteText =
@@ -18,6 +19,7 @@ export interface PostNoteText extends Record<string, unknown> {
   value?: DetaType;
   expire_in?: number;
   __views?: number;
+  __created_at?: number;
 }
 
 export interface GetHtmlClientOptions {
