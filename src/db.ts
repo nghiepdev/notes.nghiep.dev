@@ -28,7 +28,7 @@ export async function fetchNoteByKey(key: string) {
   return items[0] as NodeTextResponse;
 }
 
-export function incrementNoteViewCount(note: NoteText) {
+export function increaseNoteViewCount(note: NoteText) {
   return db.update(
     {
       __views: db.util.increment(1),

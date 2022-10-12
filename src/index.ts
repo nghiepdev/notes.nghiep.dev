@@ -8,7 +8,7 @@ import {
   db,
   fetchNoteByKey,
   fetchNoteBySecretKey,
-  incrementNoteViewCount,
+  increaseNoteViewCount,
 } from './db';
 import {getClientHtml} from './utils';
 
@@ -48,7 +48,7 @@ app.get<{
   const result = await fetchNoteByKey(request.params.key);
 
   if (result) {
-    await incrementNoteViewCount(result);
+    await increaseNoteViewCount(result);
 
     return reply.send({
       __raw: `${request.protocol}://${request.hostname}/${
@@ -73,7 +73,7 @@ app.get<{
   const result = await fetchNoteByKey(request.params.key);
 
   if (result) {
-    await incrementNoteViewCount(result);
+    await increaseNoteViewCount(result);
 
     const {key, __expires, value, __secret, __alias, __views, ...restData} =
       result;
@@ -172,9 +172,9 @@ app.put<{
 
   if (note && note.key === key) {
     // Validate alias exists
-    const {items} = await db.fetch({__alias: alias}, {limit: 1});
+    const item = await fetchNoteByKey(alias);
 
-    if (items.length) {
+    if (item) {
       return reply.status(422).send({
         message: 'The alias is already taken',
       });
