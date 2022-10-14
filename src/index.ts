@@ -1,4 +1,6 @@
 import {nanoid} from 'nanoid';
+import mime from 'mime-types';
+
 import Fastify, {FastifyListenOptions} from 'fastify';
 import {isPlainObject} from 'is-plain-object';
 import type {DetaType} from 'deta/dist/types/types/basic';
@@ -25,9 +27,7 @@ const clientHtml = getClientHtml({
 });
 
 app.get('/', async (request, reply) => {
-  reply.headers({
-    'content-type': 'text/html;charset=UTF-8',
-  });
+  reply.type('text/html');
 
   if (__DEV) {
     return reply.send(
@@ -69,6 +69,9 @@ app.get<{
   Params: {
     key: string;
   };
+  Querystring: {
+    type: string;
+  };
 }>('/:key/raw', async (request, reply) => {
   const result = await fetchNoteByKey(request.params.key);
 
@@ -87,6 +90,7 @@ app.get<{
     } = result;
 
     if (value) {
+      reply.type(mime.lookup(request.query.type) || 'text/plain');
       return reply.send(value);
     }
 

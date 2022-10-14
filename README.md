@@ -30,6 +30,13 @@ with raw only
 $ curl https://freetext.deta.dev/<key>/raw
 ```
 
+### Format output type
+
+```bash
+$ curl https://freetext.deta.dev/<key>/raw?type=js
+$ curl https://freetext.deta.dev/<key>/raw?type=html
+```
+
 ## License
 
 MIT
