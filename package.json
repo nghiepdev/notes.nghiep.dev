@@ -10,6 +10,7 @@
     "clean": "git clean -xf *.js templates"
   },
   "dependencies": {
+    "@fastify/cors": "^8.1.0",
     "deta": "^1.1.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.8.1",
