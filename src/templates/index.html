@@ -297,10 +297,10 @@
               });
 
               const result = await response.json();
-
+              const alias = result.__alias;
               this.store.submitSuccess = {
                 key: result.key,
-                alias: result.key,
+                alias: alias || result.key,
                 __secret: result.__secret,
                 origin: window.location.origin,
                 expireText:
@@ -327,7 +327,7 @@
               return;
             }
 
-            const link = new URL(`/${key}/raw`, origin);
+            const link = new URL(`/${currentAlias}/raw`, origin);
             const aliasPath = this.$refs.aliasPath.textContent;
 
             if (isIOS) {
@@ -335,7 +335,7 @@
               this.copyToClipboard(link.toString());
             }
 
-            if (aliasPath !== currentAlias) {
+            if (__secret && aliasPath !== currentAlias) {
               this.store.copyNoteLinkState = 'Saving';
               try {
                 const response = await fetch.put(`/${key}/${__secret}`, {

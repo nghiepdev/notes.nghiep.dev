@@ -10,6 +10,7 @@ import {
   db,
   fetchNoteByKey,
   fetchNoteBySecretKey,
+  fetchNoteByValue,
   increaseNoteViewCount,
 } from './db';
 import {getClientHtml} from './utils';
@@ -59,7 +60,7 @@ app.register(async fastify => {
         }/raw`,
         ...result,
         __secret: undefined,
-        __views: (result.__views || 0) + 1,
+        __views: result.__views + 1,
       });
     }
 
@@ -150,6 +151,18 @@ app.register(async fastify => {
       });
     } else {
       content.value = value;
+    }
+
+    // Avoid dupplicate value
+    const exists = await fetchNoteByValue(content.value);
+    if (exists) {
+      reply.headers({
+        Location: `/${exists.key}`,
+      });
+      return reply.send({
+        ...exists,
+        __secret: undefined,
+      });
     }
 
     const result = (await db.put(content as DetaType, undefined, {

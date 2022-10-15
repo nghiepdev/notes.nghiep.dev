@@ -48,7 +48,7 @@
                     <span
                       ref="aliasPath"
                       v-selection
-                      contenteditable
+                      :contenteditable="!!store.submitSuccess.__secret"
                       spellcheck="false"
                       class="cursor-text overflow-hidden whitespace-nowrap border border-dashed border-red-300 transition focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                     >
@@ -83,6 +83,7 @@
                 <span v-else>Your note will never expire.</span>
               </p>
               <p
+                v-if="store.submitSuccess.__secret"
                 class="mt-3 border-l-2 border-green-500 bg-slate-100 px-2 py-1 text-sm text-gray-500"
               >
                 You can also adjust the URL path to be more friendly.

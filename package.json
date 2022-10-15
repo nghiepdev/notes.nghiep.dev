@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only src",
     "build": "yarn -s clean && tsc --noEmit false && cp -r src/templates templates",
-    "clean": "git clean -xf *.js templates"
+    "clean": "git clean -xfd *.js templates -e node_modules"
   },
   "dependencies": {
     "@fastify/cors": "^8.1.0",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.1",
-    "@types/node": "^18.8.5",
+    "@types/node": "^18.11.0",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "ts-node-dev": "^2.0.0",
