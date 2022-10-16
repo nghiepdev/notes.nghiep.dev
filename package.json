@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^8.1.0",
+    "@fastify/rate-limit": "^7.5.0",
     "deta": "^1.1.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.8.1",
