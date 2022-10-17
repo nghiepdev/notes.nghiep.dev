@@ -6,6 +6,7 @@ on:
       - main
 
 env:
+  NODE_ENV: production
   APP_NAME: FreeText
   APP_DETA_PROJECT_KEY: ${{ secrets.APP_DETA_PROJECT_KEY }}
 
@@ -18,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup environments
-        run: env | grep "^APP_" >> .env
+        run: env | grep ^NODE_ENV >> .env && env | grep ^APP_ >> .env
 
       - name: Setup Nodejs
         uses: actions/setup-node@v3
@@ -27,7 +28,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependensis
-        run: yarn install
+        run: yarn install --production=false
 
       - name: Build code
         run: yarn build

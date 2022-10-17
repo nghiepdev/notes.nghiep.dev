@@ -6,9 +6,7 @@ const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
 
 type NodeTextResponse = NoteText | null;
 
-export const db = deta.Base(
-  `${process.env.APP_NAME}:${process.env.NODE_ENV || 'default'}`,
-);
+export const db = deta.Base(`${process.env.APP_NAME}:${process.env.NODE_ENV}`);
 
 export async function fetchNoteByKey(key: string) {
   const result = (await db.get(key)) as NodeTextResponse;
