@@ -39,3 +39,8 @@ jobs:
           deta-name: 'freetext'
           deta-project: 'default'
           deta-project-dir: '.'
+
+      - name: Update Deta environments
+        run: |
+          export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
+          ~/.deta/bin/deta update -e .env

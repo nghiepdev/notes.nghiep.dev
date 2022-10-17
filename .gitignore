@@ -202,7 +202,7 @@ dist
 
 
 # Deta
-.deta/state
+.deta
 /*.js
 !tailwind.config.js
 !prettier.config.js
