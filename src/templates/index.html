@@ -35,6 +35,13 @@
       };
     </script>
     <style>
+      iconify-icon {
+        display: inline-block;
+        min-width: 1em;
+      }
+      iconify-icon:not(["height"]) {
+        height: 1em;
+      }
       @keyframes spinner {
         to {
           transform: rotate(360deg);
@@ -80,8 +87,8 @@
 
             <div class="text-sm sm:text-base md:block">
               <a
-                href="https://t.me/nghiepit"
-                target="blank_telegram"
+                href="https://12bay.vn"
+                target="target_about"
                 class="mr-6 inline-block py-1 text-gray-500 hover:text-gray-600 md:py-4"
               >
                 About
@@ -152,26 +159,12 @@
         </div>
 
         <p class="mt-10 p-4 text-center text-sm text-gray-600 sm:text-base">
-          Created by
-          <a
-            class="border-b text-blue-500"
-            href="https://12bay.vn"
-            target="blank_created"
-          >
-            ©12bay.vn
-          </a>
-          <span
-            class="hidden before:-ml-1 before:content-['.'] after:-ml-1 after:content-['.'] sm:inline-block"
-          >
-            Inspired by TailwindCSS
-            <a
-              href="https://tailwindcomponents.com/component/landing-page-with-tailwind-css"
-              target="blank_inspired"
-              class="border-b text-blue-500"
-            >
-              template
-            </a>
-          </span>
+          Made with
+          <iconify-icon
+            icon="emojione:red-heart"
+            class="translate-y-px"
+          ></iconify-icon>
+          in Vietnam
         </p>
       </div>
       {modal_placeholder}
