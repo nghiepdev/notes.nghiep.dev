@@ -6,7 +6,7 @@ import {META_TITLE, META_DESCRIPTION, EXPIRE_IN} from './constants';
 
 export function getClientHtml(options: GetHtmlClientOptions) {
   let clientHtml = fs
-    .readFileSync(path.resolve(__dirname, './templates/index.html'))
+    .readFileSync(path.resolve(__dirname, '../templates/index.html'))
     .toString()
     .replace(/{title_placeholder}/g, META_TITLE)
     .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
@@ -15,13 +15,13 @@ export function getClientHtml(options: GetHtmlClientOptions) {
     .replace(
       '{form_placeholder}',
       fs
-        .readFileSync(path.resolve(__dirname, './templates/form.html'))
+        .readFileSync(path.resolve(__dirname, '../templates/form.html'))
         .toString(),
     )
     .replace(
       '{modal_placeholder}',
       fs
-        .readFileSync(path.resolve(__dirname, './templates/modal.html'))
+        .readFileSync(path.resolve(__dirname, '../templates/modal.html'))
         .toString(),
     );
 

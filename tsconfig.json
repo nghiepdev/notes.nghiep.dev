@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "rootDir": "src",
-    "outDir": ".",
+    "outDir": "dist",
     "baseUrl": ".",
     "noEmit": true,
     "strict": true,
@@ -19,6 +19,5 @@
     "transpileOnly": true,
     "require": ["dotenv/config"]
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

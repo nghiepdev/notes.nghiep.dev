@@ -250,4 +250,4 @@ if (__DEV) {
   });
 }
 
-module.exports = app;
+export = app;

@@ -203,10 +203,7 @@ dist
 
 # Deta
 .deta
-/*.js
-!tailwind.config.js
-!prettier.config.js
-/templates
+index.js
 
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,node
