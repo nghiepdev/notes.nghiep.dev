@@ -25,13 +25,15 @@
         theme: {
           extend: {
             screens: {
-              xs: {
-                max: '420px',
-              },
-              ios: {raw: '(hover: none) and (pointer: coarse)'},
+              xs: {max: '420px'},
             },
           },
         },
+        plugins: [
+          tailwind.plugin(function ({addVariant}) {
+            addVariant('ios', '@supports(-webkit-touch-callout:none)');
+          }),
+        ],
       };
     </script>
     <style>
@@ -78,7 +80,7 @@
           >
             <div>
               <a
-                href="#"
+                href="/"
                 class="inline-block py-2 text-2xl font-bold text-gray-800"
               >
                 FreeText.

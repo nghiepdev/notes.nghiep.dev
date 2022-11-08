@@ -13,10 +13,6 @@ export const EXPIRE_IN: {label: string; value: number}[] = [
     value: 10 * 60,
   },
   {
-    label: 'Expire in 30 Minutes',
-    value: 30 * 60,
-  },
-  {
     label: 'Expire in 1 Hour',
     value: 1 * 60 * 60,
   },
