@@ -1,4 +1,5 @@
 import {Deta} from 'deta';
+import {CompositeType} from 'deta/dist/types/types/basic';
 
 import {NoteText} from './types';
 
@@ -8,6 +9,29 @@ type NodeTextResponse = NoteText | null;
 
 export const db = deta.Base(`${process.env.APP_NAME}:${process.env.NODE_ENV}`);
 
+async function dbQuery<D extends unknown>(
+  query: CompositeType,
+  options: {
+    limit: number;
+  },
+) {
+  let res = await db.fetch(query);
+  let allItems = res.items;
+
+  while (res.last && allItems.length < options.limit) {
+    res = await db.fetch(query, {last: res.last});
+    allItems = allItems.concat(res.items);
+  }
+
+  const items = allItems.slice(0, options.limit) as D[];
+
+  return {
+    items,
+    count: items.length,
+    last: res.last,
+  };
+}
+
 export async function fetchNoteByKey(key: string) {
   const result = (await db.get(key)) as NodeTextResponse;
 
@@ -15,15 +39,15 @@ export async function fetchNoteByKey(key: string) {
     return result;
   }
 
-  const {items} = await db.fetch({__alias: key}, {limit: 1});
+  const {items} = await dbQuery<NodeTextResponse>({__alias: key}, {limit: 1});
 
-  return items[0] as NodeTextResponse;
+  return items[0];
 }
 
 export async function fetchNoteBySecretKey(__secret: string) {
-  const {items} = await db.fetch({__secret}, {limit: 1});
+  const {items} = await dbQuery<NodeTextResponse>({__secret}, {limit: 1});
 
-  return items[0] as NodeTextResponse;
+  return items[0];
 }
 
 export async function fetchNoteByValue(value: unknown) {
@@ -31,9 +55,12 @@ export async function fetchNoteByValue(value: unknown) {
     return undefined;
   }
 
-  const {items} = await db.fetch({value: value as never}, {limit: 1});
+  const {items} = await dbQuery<NodeTextResponse>(
+    {value: value as never},
+    {limit: 1},
+  );
 
-  return items[0] as NodeTextResponse;
+  return items[0];
 }
 
 export function increaseNoteViewCount(note: NoteText) {
