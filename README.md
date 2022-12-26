@@ -33,9 +33,13 @@ $ curl https://freetext.deta.dev/<key>/raw
 ### Format output type
 
 ```bash
-$ curl https://freetext.deta.dev/<key>/raw?type=js
-$ curl https://freetext.deta.dev/<key>/raw?type=html
+$ curl https://freetext.deta.dev/<key>.html
 ```
+
+Examples HTML output type
+
+[https://freetext.deta.dev/christmas.html](https://freetext.deta.dev/christmas.html)  
+[https://freetext.deta.dev/myheart.html](https://freetext.deta.dev/myheart.html)
 
 ## License
 

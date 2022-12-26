@@ -53,10 +53,21 @@ app.register(async fastify => {
       key: string;
     };
   }>('/:key', async (request, reply) => {
-    const result = await fetchNoteByKey(request.params.key);
+    const [key, extension] = request.params.key.split('.');
+    const result = await fetchNoteByKey(key);
 
     if (result) {
       await increaseNoteViewCount(result);
+
+      if (typeof result.value === 'string') {
+        if (extension && extension !== 'json') {
+          const contentType = mime.contentType(extension);
+          if (contentType) {
+            reply.type(contentType);
+            return reply.send(result.value);
+          }
+        }
+      }
 
       return reply.send({
         __raw: `${request.protocol}://${request.hostname}/${
@@ -77,9 +88,6 @@ app.register(async fastify => {
     Params: {
       key: string;
     };
-    Querystring: {
-      type: string;
-    };
   }>('/:key/raw', async (request, reply) => {
     const result = await fetchNoteByKey(request.params.key);
 
@@ -98,10 +106,6 @@ app.register(async fastify => {
       } = result;
 
       if (value) {
-        const contentType = mime.contentType(request.query.type);
-        if (contentType) {
-          reply.type(contentType);
-        }
         return reply.send(value);
       }
 
