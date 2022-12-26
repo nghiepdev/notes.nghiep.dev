@@ -5,15 +5,15 @@
   "homepage": "https://freetext.dete.dev",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
-    "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only src",
-    "build": "tsc --noEmit false"
+    "dev": "NODE_ENV=development ts-node-dev --respawn src",
+    "build": "tsc"
   },
   "dependencies": {
-    "@fastify/cors": "^8.1.1",
-    "@fastify/rate-limit": "^7.5.0",
+    "@fastify/cors": "^8.2.0",
+    "@fastify/rate-limit": "^7.6.0",
     "deta": "^1.1.0",
     "dotenv": "^16.0.3",
-    "fastify": "^4.9.2",
+    "fastify": "^4.10.2",
     "is-plain-object": "^5.0.0",
     "mime-types": "^2.1.35",
     "nanoid": "^3.0.0"
@@ -21,17 +21,17 @@
   "devDependencies": {
     "@types/mime-types": "^2.1.1",
     "@types/node": "^14.0.0",
-    "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.13",
+    "prettier": "^2.8.1",
+    "prettier-plugin-tailwindcss": "^0.2.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.4"
   },
   "engines": {
     "node": "^14"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nghiepit/freetext.deta.dev.git"
+    "url": "https://github.com/nghiepdev/freetext.deta.dev.git"
   },
   "author": "me@nghiep.dev",
   "license": "MIT"
