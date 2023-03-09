@@ -2,7 +2,7 @@ import {nanoid} from 'nanoid';
 import mime from 'mime-types';
 import Fastify, {FastifyListenOptions} from 'fastify';
 import FastifyCors from '@fastify/cors';
-import FastifyRateLimit, {RateLimitOptions} from '@fastify/rate-limit';
+import FastifyRateLimit from '@fastify/rate-limit';
 import {isPlainObject} from 'is-plain-object';
 import type {DetaType} from 'deta/dist/types/types/basic';
 
@@ -30,7 +30,10 @@ const app = Fastify({
 
 app.register(FastifyCors);
 app.register(FastifyRateLimit, {
-  global: false,
+  max: 100,
+  timeWindow: '1 minute',
+  ban: 10,
+  continueExceeding: true,
 });
 
 app.register(async fastify => {
@@ -117,83 +120,79 @@ app.register(async fastify => {
     });
   });
 
-  fastify.post<{Body: DetaType | PostNoteText}, {rateLimit: RateLimitOptions}>(
-    '/',
-    {config: {rateLimit: {max: 100, timeWindow: '1 minute'}}},
-    async (request, reply) => {
-      const isJson = request.headers['content-type'] === 'application/json';
-      const secret = nanoid(10);
-      let value = request.body;
-      let expireIn = 0;
+  fastify.post<{Body: DetaType | PostNoteText}>('/', async (request, reply) => {
+    const isJson = request.headers['content-type'] === 'application/json';
+    const secret = nanoid(10);
+    let value = request.body;
+    let expireIn = 0;
 
-      if (isJson) {
-        const body = request.body as PostNoteText;
+    if (isJson) {
+      const body = request.body as PostNoteText;
 
-        // Delete key and __secret
-        delete body.key;
-        delete body.__secret;
-        delete body.__views;
-        delete body.__created_at;
+      // Delete key and __secret
+      delete body.key;
+      delete body.__secret;
+      delete body.__views;
+      delete body.__created_at;
 
-        if (body.value) {
-          value = body.value;
-          delete body.value;
-        } else {
-          value = body;
-        }
-
-        if (body.expire_in) {
-          expireIn = body.expire_in;
-          delete body.expire_in;
-        }
-      }
-
-      const content: Partial<
-        Pick<NoteText, '__secret' | '__views' | '__created_at' | 'value'>
-      > = {
-        __secret: secret,
-        __views: 0,
-        __created_at: Math.floor(+new Date() / 1000),
-      };
-
-      if (isPlainObject(value)) {
-        Object.assign(content, {
-          ...content,
-          ...(value as PostNoteText),
-        });
+      if (body.value) {
+        value = body.value;
+        delete body.value;
       } else {
-        content.value = value;
+        value = body;
       }
 
-      // Avoid dupplicate value
-      const exists = await fetchNoteByValue(content.value);
-      if (exists) {
-        reply.headers({
-          Location: `/${exists.key}`,
-        });
-        return reply.send({
-          ...exists,
-          __secret: undefined,
-        });
+      if (body.expire_in) {
+        expireIn = body.expire_in;
+        delete body.expire_in;
       }
+    }
 
-      const result = (await db.put(content as DetaType, undefined, {
-        expireIn: expireIn ? +expireIn : undefined,
-      })) as NodeTextResponse;
+    const content: Partial<
+      Pick<NoteText, '__secret' | '__views' | '__created_at' | 'value'>
+    > = {
+      __secret: secret,
+      __views: 0,
+      __created_at: Math.floor(+new Date() / 1000),
+    };
 
-      if (result) {
-        reply.headers({
-          Location: `/${result.key}`,
-        });
-
-        return reply.send(result);
-      }
-
-      reply.status(400).send({
-        message: 'Oops! Something went wrong',
+    if (isPlainObject(value)) {
+      Object.assign(content, {
+        ...content,
+        ...(value as PostNoteText),
       });
-    },
-  );
+    } else {
+      content.value = value;
+    }
+
+    // Avoid dupplicate value
+    const exists = await fetchNoteByValue(content.value);
+    if (exists) {
+      reply.headers({
+        Location: `/${exists.key}`,
+      });
+      return reply.send({
+        ...exists,
+        __secret: undefined,
+      });
+    }
+
+    const result = (await db.put(content as DetaType, undefined, {
+      expireIn: expireIn ? +expireIn : undefined,
+    })) as NodeTextResponse;
+
+    if (result) {
+      reply.headers({
+        Location: `/${result.key}`,
+      });
+
+      return reply.send(result);
+    }
+
+    reply.status(400).send({
+      message: 'Oops! Something went wrong',
+    });
+  });
 
   fastify.put<{
     Params: {
