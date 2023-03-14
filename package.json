@@ -5,14 +5,13 @@
   "homepage": "https://freetext.dete.dev",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
-    "dev": "NODE_ENV=development ts-node-dev --respawn src",
+    "dev": "NODE_ENV=development tsx watch -r dotenv/config src",
     "build": "tsc --noEmit false"
   },
   "dependencies": {
     "@fastify/cors": "^8.2.0",
     "@fastify/rate-limit": "^8.0.0",
     "deta": "^1.1.0",
-    "dotenv": "^16.0.3",
     "fastify": "^4.14.1",
     "is-plain-object": "^5.0.0",
     "mime-types": "^2.1.35",
@@ -22,9 +21,10 @@
     "@tsconfig/node16-strictest": "^1.0.4",
     "@types/mime-types": "^2.1.1",
     "@types/node": "^16.0.0",
+    "dotenv": "^16.0.3",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.4",
-    "ts-node-dev": "^2.0.0",
+    "tsx": "^3.12.5",
     "typescript": "^4.9.5"
   },
   "engines": {
