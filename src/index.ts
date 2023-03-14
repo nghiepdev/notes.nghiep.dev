@@ -38,7 +38,7 @@ app.register(FastifyRateLimit, {
 });
 
 app.register(async fastify => {
-  fastify.get('/', async (request, reply) => {
+  fastify.get('/', async (_request, reply) => {
     reply.type('text/html; charset=utf-8');
 
     if (__DEV) {
@@ -49,7 +49,7 @@ app.register(async fastify => {
       );
     }
 
-    reply.send(clientHtml);
+    return reply.send(clientHtml);
   });
 
   fastify.get<{
@@ -58,7 +58,7 @@ app.register(async fastify => {
     };
   }>('/:key', async (request, reply) => {
     const [key, extension] = request.params.key.split('.');
-    const result = await fetchNoteByKey(key);
+    const result = key && (await fetchNoteByKey(key));
 
     if (result) {
       await increaseNoteViewCount(result);
@@ -83,7 +83,7 @@ app.register(async fastify => {
       });
     }
 
-    reply.status(404).send({
+    return reply.status(404).send({
       message: 'Note not found!',
     });
   });
@@ -116,7 +116,7 @@ app.register(async fastify => {
       return reply.send(restData);
     }
 
-    reply.status(404).send({
+    return reply.status(404).send({
       message: 'Note not found!',
     });
   });
@@ -190,7 +190,7 @@ app.register(async fastify => {
       return reply.send(result);
     }
 
-    reply.status(400).send({
+    return reply.status(400).send({
       message: 'Oops! Something went wrong',
     });
   });
@@ -232,14 +232,14 @@ app.register(async fastify => {
       });
     }
 
-    reply.status(404).send({
+    return reply.status(404).send({
       message: 'Note not found!',
     });
   });
 });
 
 const start = async () => {
-  const address = await app.listen({port: __PORT});
+  const address = await app.listen({port: __PORT as number});
   console.info(`⚡⚡⚡ Server ready at ${address}`);
 };
 

@@ -1,7 +1,7 @@
 import {Deta} from 'deta';
-import {CompositeType} from 'deta/dist/types/types/basic';
+import type {CompositeType} from 'deta/dist/types/types/basic';
 
-import {NoteText} from './types';
+import type {NoteText} from './types';
 
 const deta = Deta(process.env.DETA_PROJECT_KEY);
 
