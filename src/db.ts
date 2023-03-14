@@ -3,7 +3,7 @@ import {CompositeType} from 'deta/dist/types/types/basic';
 
 import {NoteText} from './types';
 
-const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
+const deta = Deta(process.env.DETA_PROJECT_KEY);
 
 type NodeTextResponse = NoteText | null;
 

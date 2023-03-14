@@ -1,6 +1,6 @@
 import {nanoid} from 'nanoid';
 import mime from 'mime-types';
-import Fastify, {FastifyListenOptions} from 'fastify';
+import Fastify from 'fastify';
 import FastifyCors from '@fastify/cors';
 import FastifyRateLimit from '@fastify/rate-limit';
 import {isPlainObject} from 'is-plain-object';
@@ -19,6 +19,7 @@ import {getClientHtml} from './utils';
 type NodeTextResponse = NoteText | null;
 
 const __DEV = process.env.NODE_ENV === 'development';
+const __PORT = process.env.PORT || 4000;
 
 const clientHtml = getClientHtml({
   shouldReplace: true,
@@ -237,20 +238,9 @@ app.register(async fastify => {
   });
 });
 
-const start = async (options: FastifyListenOptions) => {
-  app.listen(options, (error, address) => {
-    if (error) {
-      throw error;
-    }
-
-    console.info(`⚡⚡⚡ Server ready at ${address}`);
-  });
+const start = async () => {
+  const address = await app.listen({port: __PORT});
+  console.info(`⚡⚡⚡ Server ready at ${address}`);
 };
 
-if (__DEV) {
-  start({
-    port: +(process.env.PORT || 3000),
-  });
-}
-
-export = app;
+start();
