@@ -4,7 +4,7 @@ import type {CompositeType} from 'deta/dist/types/types/basic';
 import type {NoteText} from './types';
 
 const deta = Deta(
-  process.env.APP_DETA_PROJECT_KEY ?? process.env.DETA_PROJECT_KEY,
+  process.env.APP_DETA_PROJECT_KEY || process.env.DETA_PROJECT_KEY,
 );
 
 type NodeTextResponse = NoteText | null;
