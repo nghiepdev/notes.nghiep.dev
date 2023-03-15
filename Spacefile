@@ -5,8 +5,14 @@ micros:
   - name: app
     src: ./
     engine: nodejs16
+    public_routes:
+      - '/*'
     presets:
       env:
+        - name: NODE_ENV
+          default: production
+        - name: APP_DETA_PROJECT_KEY
+          description: The key of to access the collection in Deta. For the migration.
         - name: APP_NAME
           default: FreeText
     commands:

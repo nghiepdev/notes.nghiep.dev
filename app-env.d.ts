@@ -3,6 +3,7 @@ declare namespace NodeJS {
     NODE_ENV: 'production' | 'development';
     PORT: number;
     APP_NAME: string;
+    APP_DETA_PROJECT_KEY?: string;
     DETA_PROJECT_KEY: string;
   }
 }
