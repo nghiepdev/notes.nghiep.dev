@@ -1,7 +1,7 @@
 <form class="flex h-full w-full flex-col" @submit.prevent="submit">
   <div
     v-cloak
-    class="[&[v-cloak]]:opacity-100 [&[v-cloak]>.spinner]:block [&[v-cloak]]:before:absolute [&[v-cloak]]:before:inset-0 overflow-hidde relative grow shadow-sm"
+    class="overflow-hidde relative grow shadow-sm [&[v-cloak]]:!opacity-100 [&[v-cloak]]:before:absolute [&[v-cloak]]:before:inset-0 [&[v-cloak]>.spinner]:block"
   >
     <label for="content" class="sr-only">Content</label>
     <textarea
@@ -38,7 +38,7 @@
           type="submit"
           :disabled="store.disabled"
           :class="{'cursor-not-allowed': store.submiting}"
-          class="[&[v-cloak]]:bg-gray-100 inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500"
+          class="inline-flex items-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500 [&[v-cloak]]:bg-gray-100"
         >
           <iconify-icon
             v-show="!store.disabled && store.submiting"
