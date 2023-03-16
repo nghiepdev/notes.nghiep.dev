@@ -31,10 +31,8 @@ const app = Fastify({
 
 app.register(FastifyCors);
 app.register(FastifyRateLimit, {
-  max: 60,
+  max: 1000,
   timeWindow: '1 minute',
-  ban: 2,
-  continueExceeding: true,
 });
 
 app.register(async fastify => {
