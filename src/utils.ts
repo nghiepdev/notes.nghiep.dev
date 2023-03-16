@@ -10,8 +10,10 @@ export function getClientHtml(options: GetHtmlClientOptions) {
     .toString()
     .replace(/{title_placeholder}/g, META_TITLE)
     .replace(/{title_no_markup_placeholder}/g, META_TITLE.replace(/[{}]/g, ''))
+    .replace(/{app_name_placeholder}/g, process.env.APP_NAME)
     .replace(/{description_placeholder}/g, META_DESCRIPTION)
     .replace(/{expire_in_placeholder}/g, JSON.stringify(EXPIRE_IN))
+    .replace(/{about_url_placeholder}/g, process.env.APP_ABOUT_URL)
     .replace(
       '{form_placeholder}',
       fs

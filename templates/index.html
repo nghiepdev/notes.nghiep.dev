@@ -69,7 +69,7 @@
   <body>
     <div
       id="app"
-      class="[&_[v-cloak]]:opacity-0 flex min-h-screen w-full flex-col bg-white font-sans"
+      class="flex min-h-screen w-full flex-col bg-white font-sans [&_[v-cloak]]:opacity-0"
     >
       <div>
         <div
@@ -83,13 +83,13 @@
                 href="/"
                 class="inline-block py-2 text-2xl font-bold text-gray-800"
               >
-                FreeText.
+                {app_name_placeholder}.
               </a>
             </div>
 
             <div class="text-sm sm:text-base md:block">
               <a
-                href="https://12bay.vn"
+                href="{about_url_placeholder}"
                 target="target_about"
                 class="mr-6 inline-block py-1 text-gray-500 hover:text-gray-600 md:py-4"
               >
