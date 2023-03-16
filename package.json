@@ -2,7 +2,7 @@
   "name": "freetext",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://freetext.dete.dev",
+  "homepage": "https://deta.space/discovery/@nghiepit/freetext",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch -r dotenv/config src",

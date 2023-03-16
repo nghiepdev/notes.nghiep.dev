@@ -2,7 +2,7 @@
 
 > The simplest way to keep text notes. Light, clean, and free.  
 > No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.  
-> https://freetext.deta.dev
+> https://deta.space/discovery/@nghiepit/freetext
 
 ![FreeText](./screenshot.png)
 
@@ -13,7 +13,7 @@ The app targets modern browsers. Using JavaScript modules and ES6 features and m
 ### Create a Note
 
 ```bash
-$ curl -X POST https://freetext.deta.dev \
+$ curl -X POST https://yourapp.deta.app \
 -H 'Content-Type: text/plain' \
 -d 'Your text content'
 ```
@@ -21,25 +21,25 @@ $ curl -X POST https://freetext.deta.dev \
 ### Get a Note
 
 ```bash
-$ curl https://freetext.deta.dev/<key>
+$ curl https://yourapp.deta.app/<key>
 ```
 
 with raw only
 
 ```bash
-$ curl https://freetext.deta.dev/<key>/raw
+$ curl https://yourapp.deta.app/<key>/raw
 ```
 
 ### Format output type
 
 ```bash
-$ curl https://freetext.deta.dev/<key>.html
+$ curl https://yourapp.deta.app/<key>.html
 ```
 
 Examples HTML output type
 
-[https://freetext.deta.dev/christmas.html](https://freetext.deta.dev/christmas.html)  
-[https://freetext.deta.dev/myheart.html](https://freetext.deta.dev/myheart.html)
+[https://freetext-1-x1736414.deta.app/christmas.html](https://freetext-1-x1736414.deta.app/christmas.html)  
+[https://freetext-1-x1736414.deta.app/happynewyear2023.html](https://freetext-1-x1736414.deta.app/happynewyear2023.html)
 
 ## License
 
