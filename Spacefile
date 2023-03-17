@@ -11,8 +11,6 @@ micros:
       - '/*'
     presets:
       env:
-        - name: NODE_ENV
-          default: production
         - name: APP_NAME
           default: FreeText
         - name: APP_DETA_PROJECT_KEY
@@ -24,4 +22,4 @@ micros:
     include:
       - dist
       - templates
-    run: 'node dist/index.js'
+    run: 'NODE_ENV=production node dist/index.js'
