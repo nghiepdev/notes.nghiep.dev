@@ -1,7 +1,7 @@
 <form class="flex h-full w-full flex-col" @submit.prevent="submit">
   <div
     v-cloak
-    class="overflow-hidde relative grow shadow-sm [&[v-cloak]]:!opacity-100 [&[v-cloak]]:before:absolute [&[v-cloak]]:before:inset-0 [&[v-cloak]>.spinner]:block"
+    class="overflow-hidde relative grow shadow-sm [&[v-cloak]>.spinner]:block [&[v-cloak]]:!opacity-100 [&[v-cloak]]:before:absolute [&[v-cloak]]:before:inset-0"
   >
     <label for="content" class="sr-only">Content</label>
     <textarea
@@ -15,7 +15,7 @@
       :disabled="store.submiting"
     ></textarea>
     <span
-      class="spinner absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2"
+      class="spinner absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2"
     ></span>
   </div>
   <div class="inset-x-px bottom-0">

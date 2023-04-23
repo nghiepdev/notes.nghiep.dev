@@ -2,7 +2,7 @@
 
 v: 0
 icon: ./icon.png
-app_name: 'Free Text App'
+app_name: 'Free Text'
 micros:
   - name: app
     src: ./
@@ -23,3 +23,4 @@ micros:
       - dist
       - templates
     run: 'NODE_ENV=production node dist/index.js'
+    dev: yarn space:dev

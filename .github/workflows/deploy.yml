@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deta Space Deployment Github Action
-        uses: neobrains/space-deployment-github-action@v0.4
+        uses: neobrains/space-deployment-github-action@v0.5
         with:
           access_token: ${{ secrets.DETA_ACCESS_TOKEN }}
           project_id: ${{ secrets.DETA_PROJECT_ID }}

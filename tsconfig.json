@@ -1,11 +1,13 @@
 {
-  "extends": "@tsconfig/node16-strictest/tsconfig.json",
+  "extends": "@tsconfig/node16-strictest",
   "compilerOptions": {
     "outDir": "dist",
     "noEmit": true,
     "checkJs": false,
     "noPropertyAccessFromIndexSignature": false,
-    "exactOptionalPropertyTypes": false
+    "exactOptionalPropertyTypes": false,
+    "ignoreDeprecations": "5.0"
   },
+  "include": ["src", "app-env.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
