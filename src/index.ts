@@ -236,9 +236,4 @@ app.register(async fastify => {
   });
 });
 
-const start = async () => {
-  const address = await app.listen({port: __PORT});
-  console.info(`⚡⚡⚡ Server ready at ${address}`);
-};
-
-start();
+app.listen({port: __PORT});

@@ -1,19 +1,17 @@
 {
-  "name": "freetext",
-  "private": true,
+  "name": "freetext.nghiep.dev",
   "version": "1.0.0",
   "homepage": "https://freetext.nghiep.dev",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
-    "dev": "space dev",
-    "space:dev": "NODE_ENV=development tsx watch -r dotenv/config src",
+    "dev": "NODE_ENV=development space dev",
     "build": "tsc --noEmit false"
   },
   "dependencies": {
     "@fastify/cors": "^8.2.1",
     "@fastify/rate-limit": "^8.0.0",
     "deta": "^1.1.0",
-    "fastify": "^4.15.0",
+    "fastify": "^4.17.0",
     "is-plain-object": "^5.0.0",
     "mime-types": "^2.1.35",
     "nanoid": "^3.0.0"

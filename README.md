@@ -2,7 +2,7 @@
 
 > The simplest way to keep text notes. Light, clean, and free.  
 > No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.  
-> https://deta.space/discovery/@nghiepit/freetext
+> Deploy on Deta https://deta.space/discovery/@nghiepit/freetext
 
 ![FreeText](./screenshot.png)
 

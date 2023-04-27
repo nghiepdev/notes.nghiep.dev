@@ -1,20 +1,17 @@
-# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
-
 v: 0
+app_name: 'Text Note'
 icon: ./icon.png
-app_name: 'Free Text'
 micros:
   - name: app
     src: ./
     engine: nodejs16
-    public_routes:
-      - '/*'
+    public: true
     presets:
       env:
         - name: APP_NAME
           default: FreeText
         - name: APP_DETA_PROJECT_KEY
-          description: The key accesses the collection in Deta. It is used for the migration
+          description: The key is used to access the collection in Deta, and it is also used for migration. Skip if it's a new project.
         - name: APP_ABOUT_URL
           default: https://deta.space/discovery/@nghiepit/freetext
     commands:
@@ -23,4 +20,4 @@ micros:
       - dist
       - templates
     run: 'NODE_ENV=production node dist/index.js'
-    dev: yarn space:dev
+    dev: tsx watch --clear-screen=false -r dotenv/config src

@@ -1,7 +1,7 @@
 export const META_TITLE = `The simplest way to keep text notes. Light, clean, {and free.}`;
 
 export const META_DESCRIPTION =
-  'This free online allows you to create notes. No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.';
+  'This free online tool allows you to create notes. No ads, no sign-ups, no monitoring, and it&apos;s free forever. It never expires.';
 
 export const EXPIRE_IN: {label: string; value: number}[] = [
   {
