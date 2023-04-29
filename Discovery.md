@@ -1,7 +1,7 @@
 ---
 title: 'Text Note'
 tagline: 'The simplest way to keep text notes. Light, clean, and free. No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.'
-theme_color: '#1e40af'
+theme_color: '#E64D36'
 git: 'https://github.com/nghiepit/freetext'
 homepage: 'https://freetext-1-x1736414.deta.app'
 ---

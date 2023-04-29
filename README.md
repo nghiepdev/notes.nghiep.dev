@@ -1,10 +1,10 @@
-# FREE TEXT APP
+# TEXT NOTE
 
 > The simplest way to keep text notes. Light, clean, and free.  
 > No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.  
 > Deploy on Deta https://deta.space/discovery/@nghiepit/freetext
 
-![FreeText](./screenshot.png)
+![Text Note](./screenshot.png)
 
 The app targets modern browsers. Using JavaScript modules and ES6 features and more.
 
