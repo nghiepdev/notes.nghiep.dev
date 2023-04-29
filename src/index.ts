@@ -3,7 +3,6 @@ import mime from 'mime-types';
 import Fastify from 'fastify';
 import FastifyCors from '@fastify/cors';
 import FastifyRateLimit from '@fastify/rate-limit';
-import {isPlainObject} from 'is-plain-object';
 import type {DetaType} from 'deta/dist/types/types/basic';
 
 import type {NoteText, PostNoteText} from './types';
@@ -155,13 +154,13 @@ app.register(async fastify => {
       __created_at: Math.floor(+new Date() / 1000),
     };
 
-    if (isPlainObject(value)) {
+    if (typeof value === 'string') {
+      content.value = value;
+    } else {
       Object.assign(content, {
         ...content,
         ...(value as PostNoteText),
       });
-    } else {
-      content.value = value;
     }
 
     // Avoid dupplicate value
