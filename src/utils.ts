@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import type {GetHtmlClientOptions} from './types';
 import {META_TITLE, META_DESCRIPTION, EXPIRE_IN} from './constants';

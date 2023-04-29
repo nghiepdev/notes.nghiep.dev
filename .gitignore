@@ -2,4 +2,5 @@
 .env
 node_modules
 /dist
+/assets
 yarn-error.log

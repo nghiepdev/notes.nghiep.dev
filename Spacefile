@@ -3,7 +3,7 @@ app_name: 'Text Note'
 icon: ./icon.png
 micros:
   - name: app
-    src: ./
+    src: .
     engine: nodejs16
     public: true
     presets:
@@ -15,9 +15,11 @@ micros:
         - name: APP_ABOUT_URL
           default: https://deta.space/discovery/@nghiepit/freetext
     commands:
-      - yarn build
+      - yarn build:src
+      - yarn build:style
     include:
       - dist
+      - assets
       - templates
     run: 'NODE_ENV=production node dist/index.js'
     dev: tsx watch --clear-screen=false -r dotenv/config src

@@ -1,7 +1,9 @@
+import path from 'node:path';
 import {nanoid} from 'nanoid';
 import mime from 'mime-types';
 import Fastify from 'fastify';
 import FastifyCors from '@fastify/cors';
+import FastifyStatic from '@fastify/static';
 import FastifyRateLimit from '@fastify/rate-limit';
 import type {DetaType} from 'deta/dist/types/types/basic';
 
@@ -29,6 +31,10 @@ const app = Fastify({
 });
 
 app.register(FastifyCors);
+app.register(FastifyStatic, {
+  root: path.resolve(__dirname, '../assets'),
+  prefix: '/assets/',
+});
 app.register(FastifyRateLimit, {
   max: 1000,
   timeWindow: '1 minute',

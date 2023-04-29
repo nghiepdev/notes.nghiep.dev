@@ -4,25 +4,31 @@
   "homepage": "https://freetext.nghiep.dev",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
-    "dev": "NODE_ENV=development space dev",
-    "build": "tsc --noEmit false"
+    "dev": "concurrently -c 'auto' 'yarn:build:style --watch' 'yarn:dev:space'",
+    "dev:space": "NODE_ENV=development space dev",
+    "build:src": "tsc --noEmit false",
+    "build:style": "tailwindcss -i ./src/style.css -o ./assets/style.css"
   },
   "dependencies": {
     "@fastify/cors": "^8.2.1",
     "@fastify/rate-limit": "^8.0.0",
+    "@fastify/static": "^6.10.1",
     "deta": "^1.1.0",
     "fastify": "^4.17.0",
     "mime-types": "^2.1.35",
     "nanoid": "^3.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@tsconfig/node16-strictest": "^1.0.4",
     "@types/mime-types": "^2.1.1",
     "@types/node": "^16.0.0",
+    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
-    "tsx": "^3.12.6",
+    "tailwindcss": "^3.3.2",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
   "prettier": {
