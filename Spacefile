@@ -18,8 +18,9 @@ micros:
       - yarn build:src
       - yarn build:style
     include:
+      - node_modules
       - dist
       - assets
       - templates
     run: 'NODE_ENV=production node dist/index.js'
-    dev: tsx watch --clear-screen=false -r dotenv/config src
+    dev: npx tsx watch --clear-screen=false -r dotenv/config src
