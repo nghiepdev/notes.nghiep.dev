@@ -3,13 +3,11 @@ import type {CompositeType} from 'deta/dist/types/types/basic';
 
 import type {NoteText} from './types';
 
-const deta = Deta(
-  process.env.APP_DETA_PROJECT_KEY || process.env.DETA_PROJECT_KEY,
-);
+const deta = Deta(process.env.APP_DETA_PROJECT_KEY);
 
 type NodeTextResponse = NoteText | null;
 
-export const db = deta.Base(`${process.env.APP_NAME}:${process.env.NODE_ENV}`);
+export const db = deta.Base(process.env.APP_DETA_BASE);
 
 async function dbQuery<D extends unknown>(
   query: CompositeType,
