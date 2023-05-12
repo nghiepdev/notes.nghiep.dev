@@ -9,10 +9,10 @@ micros:
       env:
         - name: APP_NAME
           default: FreeNote
-        - name: APP_DETA_BASE
-          default: freenote
         - name: APP_DETA_PROJECT_KEY
           description: Skip if it's a new project
+        - name: APP_DETA_BASE
+          default: freenote
         - name: APP_ABOUT_URL
           default: https://deta.space/discovery/@nghiepit/freetext
     commands:

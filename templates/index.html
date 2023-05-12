@@ -18,7 +18,7 @@
       property="og:image"
       content="https://images.unsplash.com/photo-1527656855834-0235e41779fd?auto=format&fit=crop&w=1548&q=80"
     />
-    <script src="//unpkg.com/iconify-icon@1" async></script>
+    <script src="https://unpkg.com/iconify-icon@1" async></script>
     <link href="/assets/style.css" rel="stylesheet" />
   </head>
   <body>
@@ -66,12 +66,15 @@
         >
           <div class="px-4 py-4 md:py-16">
             <div class="relative w-full text-center md:mx-auto md:max-w-2xl">
-              <h1
-                v-html="titleMarkup"
+              <div
                 class="mb-16 text-xl font-bold leading-tight text-gray-700 transition sm:text-2xl md:mb-6 md:text-5xl"
               >
-                {title_no_markup_placeholder}
-              </h1>
+                <div
+                  v-html="titleMarkup"
+                  class="[&:empty]:hidden [&:not(:empty)+h1]:hidden"
+                ></div>
+                <h1>{title_no_markup_placeholder}</h1>
+              </div>
 
               <p class="md:px-18 hidden text-gray-600 md:block md:text-xl">
                 {description_placeholder}
