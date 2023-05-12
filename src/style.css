@@ -6,7 +6,7 @@ iconify-icon {
   display: inline-block;
   min-width: 1em;
 }
-iconify-icon:not(["height"]) {
+iconify-icon:not([height]) {
   height: 1em;
 }
 .spinner:before {

@@ -17,7 +17,7 @@ micros:
           default: https://deta.space/discovery/@nghiepit/freetext
     commands:
       - yarn build:src
-      - yarn build:style
+      - yarn build:style --minify
     include:
       - node_modules
       - dist
