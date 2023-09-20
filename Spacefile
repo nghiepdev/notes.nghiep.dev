@@ -8,11 +8,11 @@ micros:
     presets:
       env:
         - name: APP_NAME
-          default: FreeNote
+          default: Notes
         - name: APP_DETA_PROJECT_KEY
           description: Skip if it's a new project
         - name: APP_DETA_BASE
-          default: freenote
+          default: notes
         - name: APP_ABOUT_URL
           default: https://deta.space/discovery/@nghiepit/freetext
     commands:

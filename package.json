@@ -1,7 +1,7 @@
 {
-  "name": "freenote.nghiep.dev",
+  "name": "notes.nghiep.dev",
   "version": "1.0.0",
-  "homepage": "https://freenote.nghiep.dev",
+  "homepage": "https://notes.nghiep.dev",
   "description": "The simplest way to keep notes. Light, clean, and free.",
   "scripts": {
     "dev": "npx concurrently -c 'auto' 'yarn:build:style --watch' 'yarn:dev:space'",
@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nghiepdev/freenote.nghiep.dev.git"
+    "url": "https://github.com/nghiepdev/notes.nghiep.dev.git"
   },
   "author": "me@nghiep.dev",
   "license": "MIT"
