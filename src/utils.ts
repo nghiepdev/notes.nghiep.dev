@@ -1,5 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
 
 import type {GetHtmlClientOptions} from './types';
 import {META_TITLE, META_DESCRIPTION, EXPIRE_IN} from './constants';

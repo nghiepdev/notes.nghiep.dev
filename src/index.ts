@@ -15,7 +15,7 @@ import {
   fetchNoteByValue,
   increaseNoteViewCount,
 } from './db';
-import {getClientHtml} from './utils';
+import {__dirname, getClientHtml} from './utils';
 
 type NodeTextResponse = NoteText | null;
 
@@ -241,4 +241,5 @@ app.register(async fastify => {
   });
 });
 
-app.listen({port: __PORT});
+await app.listen({port: __PORT});
+console.log('⚡⚡⚡ Listening on port ' + __PORT);

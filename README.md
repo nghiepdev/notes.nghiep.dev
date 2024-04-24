@@ -1,4 +1,4 @@
-# TEXT NOTE
+# NOTES
 
 > The simplest way to keep text notes. Light, clean, and free.  
 > No Ads, no sign up, no monitoring, nothing. Free forever. Never expired.  
@@ -13,7 +13,7 @@ The app targets modern browsers. Using JavaScript modules and ES6 features and m
 ### Create a Note
 
 ```bash
-$ curl -X POST https://yourapp.deta.app \
+$ curl -X POST https://notes.nghiep.dev \
 -H 'Content-Type: text/plain' \
 -d 'Your text content'
 ```
@@ -38,8 +38,8 @@ $ curl https://yourapp.deta.app/<key>.html
 
 Examples HTML output type
 
-[https://freetext-1-x1736414.deta.app/christmas.html](https://freetext-1-x1736414.deta.app/christmas.html)  
-[https://freetext-1-x1736414.deta.app/happynewyear2023.html](https://freetext-1-x1736414.deta.app/happynewyear2023.html)
+[https://notes.nghiep.dev/christmas.html](https://notes.nghiep.dev/christmas.html)  
+[https://notes.nghiep.dev/happynewyear2023.html](https://freetext-1-x1736414.deta.app/happynewyear2023.html)
 
 ## License
 

@@ -1,6 +1,4 @@
-.space
-.env
 node_modules
+.env*local
 /dist
 /assets
-yarn-error.log
