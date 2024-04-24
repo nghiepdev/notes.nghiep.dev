@@ -39,7 +39,7 @@ $ curl https://yourapp.deta.app/<key>.html
 Examples HTML output type
 
 [https://notes.nghiep.dev/christmas.html](https://notes.nghiep.dev/christmas.html)  
-[https://notes.nghiep.dev/happynewyear2023.html](https://freetext-1-x1736414.deta.app/happynewyear2023.html)
+[https://notes.nghiep.dev/happynewyear2023.html](https://notes.nghiep.dev/happynewyear2023.html)
 
 ## License
 

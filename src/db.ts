@@ -32,7 +32,7 @@ async function dbQuery<D extends unknown>(
   };
 }
 
-export async function fetchNoteByKey(key: string) {
+export async function fetchNoteByKey(key: string): Promise<any> {
   const result = (await db.get(key)) as NodeTextResponse;
 
   if (result) {

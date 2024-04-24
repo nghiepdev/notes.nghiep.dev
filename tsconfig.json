@@ -4,8 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "baseUrl": "src",
-    "outDir": "dist",
-    "noEmit": true
+    "declaration": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
