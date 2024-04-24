@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "npx concurrently -c 'auto' 'pnpm:build:style --watch' 'pnpm:dev:watch'",
     "dev:watch": "NODE_ENV=development node --watch --watch-preserve-output --env-file=.env --env-file=.env.local --import tsx src",
-    "start": " node --env-file=.env --import tsx src",
     "build:style": "tailwindcss -i ./src/style.css -o ./assets/style.css",
     "preinstall": "npx only-allow pnpm"
   },
@@ -44,7 +43,7 @@
   },
   "engines": {
     "node": "20",
-    "pnpm": "9"
+    "pnpm": "8"
   },
   "repository": {
     "type": "git",
