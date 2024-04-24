@@ -241,5 +241,12 @@ app.register(async fastify => {
   });
 });
 
-await app.listen({port: __PORT});
-console.log('⚡⚡⚡ Listening on port ' + __PORT);
+if (__DEV) {
+  await app.listen({port: __PORT});
+  console.log('⚡⚡⚡ Listening on port ' + __PORT);
+}
+
+export default async function handler(req: any, res: any) {
+  await app.ready();
+  app.server.emit('request', req, res);
+}
